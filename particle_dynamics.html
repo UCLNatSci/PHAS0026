@@ -1,0 +1,668 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Particle Dynamics &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'particle_dynamics';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to PHAS0026 - Mathematical Methods for Theoretical Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ODEs.html">Linear Ordinary Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="independent_functions.html">Independence of Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variationofparameters.html">Variation of Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Laplacian.html">Laplace Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="greensfunction.html">Green’s Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fparticle_dynamics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/particle_dynamics.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Particle Dynamics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-functions-describing-velocity-and-acceleration-of-a-moving-particle">Vector Functions Describing Velocity and Acceleration of a Moving Particle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-circular-motion">Example: Circular Motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rolling-wheel">Example: Rolling Wheel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-acceleration-with-three-dimensional-spatial-coordinates">Velocity and Acceleration with Three-Dimensional Spatial Coordinates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cylindrical-coordinates">Cylindrical Coordinates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spherical-coordinates">Spherical Coordinates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="particle-dynamics">
+<h1>Particle Dynamics<a class="headerlink" href="#particle-dynamics" title="Permalink to this heading">#</a></h1>
+<section id="vector-functions-describing-velocity-and-acceleration-of-a-moving-particle">
+<h2>Vector Functions Describing Velocity and Acceleration of a Moving Particle<a class="headerlink" href="#vector-functions-describing-velocity-and-acceleration-of-a-moving-particle" title="Permalink to this heading">#</a></h2>
+<p>In this unit, we wish to quantify the motion of a particle, or a group of particles, which move in response to different types of <strong>forces</strong>. To do this, we will use vector functions to represent the position, velocity, and acceleration of particles in different coordinate systems. We start with the case of <strong>Cartesian</strong> coordinates, the simplest case. The vector position of our particle with respect to the origin, at some time <span class="math notranslate nohighlight">\( t \)</span>, can be written (using bold typeface convention for vector quantity):</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}(t) = x(t)\,\vec{\hat{x}} + y(t)\,\vec{\hat{y}} + z(t)\,\vec{\hat{z}},\]</div>
+<p>where the vectors <span class="math notranslate nohighlight">\( \vec{\hat{x}}, \vec{\hat{y}}, \vec{\hat{z}} \)</span> are unit vectors aligned with the axes of the coordinate system.</p>
+<p>The <strong>velocity</strong>, <span class="math notranslate nohighlight">\( \vec{v}(t) \)</span>, of the particle is the rate of change of its vector position with time. To calculate this, we simply differentiate all the individual components in our general expression:</p>
+<div class="math notranslate nohighlight">
+\[\vec{v}(t) = \vec{r}'(t) = x'(t)\,\vec{\hat{x}} + y'(t)\,\vec{\hat{y}} + z'(t)\,\vec{\hat{z}},\]</div>
+<p>where the prime notation (<span class="math notranslate nohighlight">\( ' \)</span>) indicates taking a derivative of the functions <span class="math notranslate nohighlight">\( x(t), y(t), z(t) \)</span> with respect to time.</p>
+<p>What about acceleration? By definition, <strong>acceleration</strong> <span class="math notranslate nohighlight">\( \vec{a}(t) \)</span> is the rate of change of velocity, so:</p>
+<div class="math notranslate nohighlight">
+\[\vec{a}(t) = \vec{v}'(t) = \vec{r}''(t) = x''(t)\,\vec{\hat{x}} + y''(t)\,\vec{\hat{y}} + z''(t)\,\vec{\hat{z}}.\]</div>
+<p>These definitions give very simple expressions for motion under constant acceleration. For example, a vertically falling body close enough to the surface of the Earth experiences a constant downward acceleration, <span class="math notranslate nohighlight">\( g \approx 9.8\,\mathrm{m\cdot s^{-2}} \)</span>. If we take the downward vertical direction as <span class="math notranslate nohighlight">\( -z \)</span>, then <span class="math notranslate nohighlight">\( \vec{a} = -g\,\vec{\hat{z}} \)</span>. Using subscript notation to indicate vector component, <span class="math notranslate nohighlight">\( a_z = -g \)</span>. If the body is initially at rest (zero velocity) at a height <span class="math notranslate nohighlight">\( h \)</span> above the ground, then dropped, we can integrate the definition of acceleration to find how its velocity evolves with time:</p>
+<div class="math notranslate nohighlight">
+\[v_z(t_f)-v_z(0) = \int_{0}^{t_f} a_z(t)\,dt = -g\,(t_f-0) \Rightarrow v_z(t_f) = -g\,t_f.\]</div>
+<p>Thus the particle’s velocity increases linearly with time during its fall. To work out how far it falls in the same time interval <span class="math notranslate nohighlight">\( t=0\rightarrow t_f \)</span>, we integrate the expression for velocity:</p>
+<div class="math notranslate nohighlight">
+\[z(t_f)-z(0) = \int_{0}^{t_f} v_z(t)\,dt = \int_{0}^{t_f} -g\,t\,dt \Rightarrow z(t_f) -h = -\frac{1}{2}\,g\,t_f^2 \Rightarrow z(t_f) = h-\frac{1}{2}\,g\,t_f^2.\]</div>
+<p>The particle’s journey finishes when it strikes the ground at <span class="math notranslate nohighlight">\( z=0 \)</span>, at which the corresponding time <span class="math notranslate nohighlight">\( t_{\mathrm{end}} \)</span> will satisfy <span class="math notranslate nohighlight">\( 0 = h-\frac{1}{2}\,g\,t_{\mathrm{end}}^2 \)</span>. Solving this equality, we obtain</p>
+<div class="math notranslate nohighlight">
+\[t_{\mathrm{end}} = \sqrt{\frac{2h}{g}}.\]</div>
+<section id="example-circular-motion">
+<h3>Example: Circular Motion<a class="headerlink" href="#example-circular-motion" title="Permalink to this heading">#</a></h3>
+<p>Of course, the Cartesian coordinate system is not our only choice for describing particle motion. Other coordinate systems also follow the basic definitions of velocity and acceleration; however, the corresponding expressions may look a little different in coordinate systems where the unit vectors are locally defined—in other words, where the coordinate unit vectors may change direction as the particle moves.</p>
+<p>A simple example of this is a particle executing <strong>circular motion</strong> in the Cartesian <span class="math notranslate nohighlight">\( xy \)</span> plane. If the particle moves on a circular path of constant radius <span class="math notranslate nohighlight">\( b \)</span>, then we may specify its position using two Cartesian coordinates which are themselves functions of time:</p>
+<div class="math notranslate nohighlight">
+\[x = b\,\cos(\omega\,t), \quad y = b\,\sin(\omega\,t),\]</div>
+<p>where the constant <span class="math notranslate nohighlight">\( \omega \)</span> is the <strong>angular velocity</strong> of the particle. <span class="math notranslate nohighlight">\( \omega = \frac{2\pi}{T} \)</span>, where <span class="math notranslate nohighlight">\( T \)</span> is the period of the motion.</p>
+<p><img alt="Diagram of particle executing circular motion, showing direction of position and velocity vectors at time , when angular coordinate is ." src="Figs/circmotion.pdf" /></p>
+<p>Equivalently, we could use the single angular coordinate <span class="math notranslate nohighlight">\( \phi = \omega\,t \)</span> to trace the particle position. In a general polar coordinate system, <span class="math notranslate nohighlight">\( \phi \)</span> is the angle between the particle’s position vector and the <span class="math notranslate nohighlight">\( x \)</span> axis; and the radial distance <span class="math notranslate nohighlight">\( r \)</span> from the origin specifies the second coordinate needed to specify any position in the two-dimensional plane. In this simple example, <span class="math notranslate nohighlight">\( r \)</span> is held constant at value <span class="math notranslate nohighlight">\( b \)</span>.</p>
+<p>The polar coordinate unit vectors point locally in the direction of maximum increase in those coordinates. Thus, unit vector <span class="math notranslate nohighlight">\( \vec{\hat{r}} \)</span> points radially outwards from the origin at the position of our particle, while unit vector <span class="math notranslate nohighlight">\( \vec{\hat{\phi}} \)</span> points along the local direction of rotation of the particle at the particle’s position. Both of these unit vectors execute one full rotation for one period of the motion—that is, a time interval of duration <span class="math notranslate nohighlight">\( T=2\pi/\omega \)</span>, during which <span class="math notranslate nohighlight">\( \phi \)</span> changes value by <span class="math notranslate nohighlight">\( 2\pi \)</span>.</p>
+<p>If we choose to use these unit vectors for calculating velocity and acceleration in polar coordinates, we commence with the position of the particle, which, by definition, is:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}(t) = b\,\vec{\hat{r}}(t).\]</div>
+<p>We have to differentiate the full vector function <span class="math notranslate nohighlight">\( \vec{r}(t) \)</span> to get the velocity. <span class="math notranslate nohighlight">\( b \)</span> is constant with time, but the radial unit vector is not—it changes direction, according to:</p>
+<div class="math notranslate nohighlight">
+\[\vec{\hat{r}}'(t) = \frac{d}{dt}\,(\cos(\omega\,t)\,\vec{\hat{x}} + \sin(\omega\,t)\,\vec{\hat{y}}) = \omega\,(-\sin(\omega\,t)\,\vec{\hat{x}} + \cos(\omega\,t)\,\vec{\hat{y}}) = \omega\,\vec{\hat{\phi}}.\]</div>
+<p>We introduce the unit vector <span class="math notranslate nohighlight">\( \vec{\hat{\phi}} \)</span> in the final step as we identify it with the unit vector in the previous line, which is always orthogonal to <span class="math notranslate nohighlight">\( \vec{\hat{r}} \)</span> and which always points along the direction of motion of the particle. Thus we have:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}'(t) = b\,\vec{\hat{r}}'(t) = b\omega\,\vec{\hat{\phi}}(t).\]</div>
+<p>Furthermore, for the acceleration, we see that we need to differentiate <span class="math notranslate nohighlight">\( \vec{\hat{\phi}}(t) \)</span> with respect to time, as follows:</p>
+<div class="math notranslate nohighlight">
+\[\vec{\hat{\phi}}'(t) = \frac{d}{dt}\,(-\sin(\omega\,t)\,\vec{\hat{x}} + \cos(\omega\,t)\,\vec{\hat{y}}) = \omega\,(-\cos(\omega\,t)\,\vec{\hat{x}} - \sin(\omega\,t)\,\vec{\hat{y}}) = -\omega\,\vec{\hat{r}}.\]</div>
+<p>And so, our expression for acceleration becomes:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}''(t) = b\omega\,\vec{\hat{\phi}}'(t) = -b\omega^2\,\vec{\hat{r}},\]</div>
+<p>which always points towards the center of the rotation (i.e., the origin, in this example) and has a magnitude <span class="math notranslate nohighlight">\( b\omega^2 = \frac{v_{\phi}^2}{b} \)</span>, where the uniform rotational speed <span class="math notranslate nohighlight">\( v_{\phi}=b\omega \)</span>. This type of acceleration, associated with rotational motion, is known as <strong>centripetal acceleration</strong>. Because it acts perpendicularly to the direction of motion, it changes the particle’s direction but not its speed.</p>
+</section>
+<section id="example-rolling-wheel">
+<h3>Example: Rolling Wheel<a class="headerlink" href="#example-rolling-wheel" title="Permalink to this heading">#</a></h3>
+<p>Consider a point on the moving rim of a rolling wheel of radius <span class="math notranslate nohighlight">\( b \)</span>. Let the position of this point be at a height <span class="math notranslate nohighlight">\( 2b \)</span> above the ground (i.e., the uppermost point on the rim) at time zero. As time proceeds, the position of the center of the wheel can be described by:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}_{w}(t) = b\,\omega\,t\,\vec{\hat{x}} + b\,\vec{\hat{y}},\]</div>
+<p>where the center of the wheel moves in the <span class="math notranslate nohighlight">\( x \)</span> direction at a speed given by one wheel circumference unrolling along the ground per rotational period, or <span class="math notranslate nohighlight">\( \frac{2\pi\,b}{\frac{2\pi}{\omega}}=b\,\omega \)</span>. We have assumed that the wheel lies in the <span class="math notranslate nohighlight">\( xy \)</span> plane during its motion. Figure \ref{fig:wheel} illustrates the motion of this point.</p>
+<p><img alt="Cycloidal trajectory (solid blue curve with arrows) of a moving point on rim of rolling wheel (see text). Black semi-circle indicates the right side of the wheel at time zero." src="Figs/wheel.pdf" /></p>
+<p>Our moving point, in a frame of reference where the wheel center is stationary, has a position at time <span class="math notranslate nohighlight">\( t \)</span>, relative to the wheel center, given by:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}_{p}(t) = b\,\sin(\omega\,t)\,\vec{\hat{x}} + b\,\cos(\omega\,t)\,\vec{\hat{y}}.\]</div>
+<p>The complete position vector of our rolling point is thus:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}_{w}(t) + \vec{r}_{p}(t) = b\,(\omega\,t+\sin(\omega\,t))\,\vec{\hat{x}} + b\,(1+\cos(\omega\,t))\,\vec{\hat{y}}.\]</div>
+<p>Differentiating once with respect to time gives the velocity of the moving point:</p>
+<div class="math notranslate nohighlight">
+\[\vec{v}(t) = b\,(\omega+\omega\,\cos(\omega\,t))\,\vec{\hat{x}} + -\omega\,b\,\sin(\omega\,t)\,\vec{\hat{y}}.\]</div>
+<p>Note that, for times when <span class="math notranslate nohighlight">\( \omega t = 0, 2\pi, 4\pi, 6\pi, \ldots \)</span>, when the point is at the uppermost location on the wheel, the velocity is of magnitude <span class="math notranslate nohighlight">\( 2\omega b \)</span> in the <span class="math notranslate nohighlight">\( x \)</span> direction – that is, the point is instantaneously moving at twice the velocity of the moving center of the wheel.</p>
+<p>On the other hand, for times when <span class="math notranslate nohighlight">\( \omega t = \pi, 3\pi, 5\pi, \ldots \)</span>, when the point is in contact with the ground, its instantaneous velocity is zero.</p>
+<p>Differentiating again with respect to time gives the acceleration of the moving point:</p>
+<div class="math notranslate nohighlight">
+\[\vec{a}(t) = \vec{v}'(t) = -b\,\omega^2\,\sin(\omega\,t)\,\vec{\hat{x}} - b\,\omega^2\,\cos(\omega\,t)\,\vec{\hat{y}} = -\omega^2\,\vec{r}_p(t).\]</div>
+<p>We recognize that this acceleration is always directed from the moving point towards the center of the wheel at all times, and is of magnitude <span class="math notranslate nohighlight">\( b\omega^2 \)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="velocity-and-acceleration-with-three-dimensional-spatial-coordinates">
+<h3>Velocity and Acceleration with Three-Dimensional Spatial Coordinates<a class="headerlink" href="#velocity-and-acceleration-with-three-dimensional-spatial-coordinates" title="Permalink to this heading">#</a></h3>
+<p>When we consider particle motion in three dimensions, logically we need three coordinates to specify vector quantities such as position, velocity, and acceleration. The general relationships still hold – for example, velocity is the rate of change of position with respect to time. In this section, we extend some of the ideas from the previous section to derive appropriate formulae for these quantities in the <strong>cylindrical</strong> and <strong>spherical</strong> coordinate systems for three-dimensional space.</p>
+<section id="cylindrical-coordinates">
+<h4>Cylindrical Coordinates<a class="headerlink" href="#cylindrical-coordinates" title="Permalink to this heading">#</a></h4>
+<p>An illustration of cylindrical coordinates and associated, locally defined unit vectors is shown in Figure \ref{fig:cylcoords}. The three coordinates are: <span class="math notranslate nohighlight">\( R \)</span> (cylindrical radial distance), which is the perpendicular distance of the point of interest from some reference axis (here chosen to be the Cartesian <span class="math notranslate nohighlight">\( z \)</span> axis); <span class="math notranslate nohighlight">\( \phi \)</span>, the azimuthal angle between the <span class="math notranslate nohighlight">\( x \)</span> axis and the projection of the position vector onto the <span class="math notranslate nohighlight">\( xy \)</span> plane; and <span class="math notranslate nohighlight">\( z \)</span>, which is identical to the usual Cartesian <span class="math notranslate nohighlight">\( z \)</span> coordinate.</p>
+<p><img alt="Illustration of cylindrical coordinates and unit vectors (from the book by Fowles and Cassiday)." src="Figs/cylcoords.pdf" /></p>
+<p>Now, the position vector of any moving particle with respect to the origin can be expressed, using the corresponding (locally defined) unit vectors in this system, as:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}(t) = R\,\vec{{e}_R} + z\,\vec{{e}_z}.\]</div>
+<p>The unit vector <span class="math notranslate nohighlight">\( \vec{{e}_R} \)</span> will change direction as the particle moves, since it is parallel to the direction from the closest point on the <span class="math notranslate nohighlight">\( z \)</span> axis to the position of the particle itself. On the other hand, the unit vector <span class="math notranslate nohighlight">\( \vec{{e}_z} \)</span> will not change with the particle motion.</p>
+<p>We can thus use similar calculations as were done in the previous section to prove that:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\vec{{e}_R}}{dt} = \dot{\phi}\,\vec{{e}_{\phi}},\]</div>
+<p>where we have used the overdot notation to denote time derivative, <span class="math notranslate nohighlight">\( \dot{\phi} = \frac{d\phi}{dt} \)</span>.</p>
+<p>Using this same notation now to calculate the velocity in cylindrical coordinates:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{\vec{r}} = \dot{R}\,\vec{{e}_R} + R\,\dfrac{d{\vec{{e}_R}}}{dt} + \dot{z}\,\vec{{e}_z} \\
+= \dot{R}\,\vec{{e}_R} + R\,\dot{\phi}\,{\vec{{e}_{\phi}}} + \dot{z}\,\vec{{e}_z}.\end{split}\]</div>
+<p>The cylindrical components of the above equation represent the cylindrical radial velocity, the azimuthal velocity (equivalent to a local rotational component of motion about the <span class="math notranslate nohighlight">\( z \)</span> axis), and the axial velocity.</p>
+<p>Differentiating the azimuthal unit vector <span class="math notranslate nohighlight">\( \vec{{e}_{\phi}} \)</span> with respect to time, using similar reasoning as for the equation above, gives us:</p>
+<div class="math notranslate nohighlight">
+\[\vec{{e}_{\phi}}'(t) = -\dot{\phi}\,\vec{{e}_{R}}.\]</div>
+<p>If we now use this result and the previous equation when we differentiate velocity to get acceleration, we arrive at (proof is left for the reader as an exercise):</p>
+<div class="math notranslate nohighlight">
+\[\ddot{\vec{r}} = (\ddot{R}-R\,\dot{\phi}^2)\,\vec{{e}_R} + (R\,\ddot{\phi} + 2\dot{R}\dot{\phi})\,\vec{{e}_{\phi}} + \ddot{z}\,\vec{{e}_{z}}.\]</div>
+<p>We can identify the term <span class="math notranslate nohighlight">\( -R\,\dot{\phi}^2\,\vec{{e}_R} \)</span> in this expression as the centripetal acceleration associated with that component of the motion which represents rotation about the <span class="math notranslate nohighlight">\( z \)</span> axis.</p>
+</section>
+<section id="spherical-coordinates">
+<h4>Spherical Coordinates<a class="headerlink" href="#spherical-coordinates" title="Permalink to this heading">#</a></h4>
+<p>In this section, we repeat the same general strategy for deriving formulae for velocity and acceleration in the <strong>spherical polar coordinates</strong> for three-dimensional space. We remind ourselves, from the previous section, that this strategy involves expressing the local unit vectors of our coordinate system in a form which is relatively straightforward to differentiate - the Cartesian form of these vectors is a good choice here. Differentiation then allows us to express the time derivatives of each of our local unit vectors in terms of other unit vectors in the triad, which in turn allows us to make final derivations of the spherical polar implementations of velocity and acceleration of a moving particle. Note that the vectors which we obtain for a particle’s velocity and acceleration ultimately must have the same final magnitude and direction in all coordinate systems - however, the different orientations of unit coordinate vectors in these different systems mean that the individual <strong>components</strong> of acceleration and velocity are indeed dependent on our choice of coordinates.</p>
+<p><img alt="Illustration of spherical coordinates and unit vectors (from the book by Fowles and Cassiday)." src="Figs/spherecoords.pdf" /></p>
+<p>With these concepts in mind, we now turn to the spherical polar coordinate system, whose position coordinates and local unit vectors are illustrated in
+Figure \ref{fig:spherecoords}.
+We see that in this system, the three quantities which now specify a particle’s position are: <span class="math notranslate nohighlight">\( r \)</span>, its radial distance from the origin; <span class="math notranslate nohighlight">\( \theta \)</span>, the polar angle which is the angle between the <span class="math notranslate nohighlight">\( z \)</span> Cartesian axis and the position vector of the particle; <span class="math notranslate nohighlight">\( \phi \)</span>, the azimuthal angle which is the angle between the <span class="math notranslate nohighlight">\( x \)</span> axis and the projection of the position vector onto the <span class="math notranslate nohighlight">\( xy \)</span> plane.</p>
+<p>If we express these unit vectors in the Cartesian components, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{{e}_{r}} = \sin\theta\,\cos\phi\,\vec{{e}_x} + \sin\theta\,\sin\phi\,\vec{{e}_y} + \cos\theta\,\vec{{e}_z}, \\
+\vec{{e}_{\theta}} = \cos\theta\,\cos\phi\,\vec{{e}_x} + \cos\theta\,\sin\phi\,\vec{{e}_y} - \sin\theta\,\vec{{e}_z}, \\
+\vec{{e}_{\phi}} = -\sin\phi\,\vec{{e}_x} + \cos\phi\,\vec{{e}_y}.\end{split}\]</div>
+<p>The position vector of any moving particle with respect to the origin can be expressed, using the corresponding (locally defined) unit vectors in this system, as:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}(t) = r\,\vec{{e}_{r}}.\]</div>
+<p>Now we can calculate the velocity of a particle expressed in spherical coordinates by differentiating:</p>
+<div class="math notranslate nohighlight">
+\[\dot{\vec{r}} = \dot{r}\,\vec{{e}_{r}} + r\,\dfrac{d{\vec{{e}_{r}}}}{dt}.\]</div>
+<p>Thus, we will need to determine <span class="math notranslate nohighlight">\( \dfrac{d{\vec{{e}_{r}}}}{dt} \)</span>. This turns out to be a bit complicated since we will have to deal with the dependencies of the spherical unit vectors on both <span class="math notranslate nohighlight">\( \theta \)</span> and <span class="math notranslate nohighlight">\( \phi \)</span>. However, the following relationships emerge with the necessary differentiation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\vec{e}_{r}}{dt} = \dot{\theta}\,\vec{e}_{\theta} + \dot{\phi}\,\sin\theta\,\vec{e}_{\phi}.\]</div>
+<p>Hence the velocity in spherical coordinates can be expressed as:</p>
+<div class="math notranslate nohighlight">
+\[\dot{\vec{r}} = \dot{r}\,\vec{e}_{r} + r\,\dot{\theta}\,\vec{e}_{\theta} + r\,\sin\theta\,\dot{\phi}\,\vec{e}_{\phi}.\]</div>
+<p>The components of the above expression represent the radial velocity, the polar component of motion, and the azimuthal component of motion, respectively.</p>
+<p>Next, we differentiate the <span class="math notranslate nohighlight">\( \vec{e}_{\theta} \)</span> and <span class="math notranslate nohighlight">\( \vec{e}_{\phi} \)</span> vectors using similar reasoning to derive the acceleration:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{d\vec{e}_{\theta}}{dt} = -\dot{\theta}\,\vec{e}_{r} + \dot{\phi}\,\sin\theta\,\vec{e}_{\phi}, \\
+\frac{d\vec{e}_{\phi}}{dt} = -\dot{\phi}\,\cos\theta\,\vec{e}_{r} - \dot{\theta}\,\sin\theta\,\vec{e}_{\phi}.\end{split}\]</div>
+<p>The final form of the acceleration in spherical coordinates is given as:</p>
+<div class="math notranslate nohighlight">
+\[\ddot{\vec{r}} = (\ddot{r} - r\,\dot{\theta}^2 - r\,\sin^2\theta\,\dot{\phi}^2)\,\vec{e}_{r} + (r\,\ddot{\theta} + 2\,\dot{r}\,\dot{\theta})\,\vec{e}_{\theta} + (r\,\sin\theta\,\ddot{\phi} + 2\,\dot{r}\,\sin\theta\,\dot{\phi} + 2\,r\,\dot{\theta}\,\cos\theta\,\dot{\phi})\,\vec{e}_{\phi}.\]</div>
+<p>We note that the quantities which represent the centripetal acceleration components are now more complicated in spherical coordinates. The reader is invited to explore these components in detail as an exercise.</p>
+<p>The above calculations illustrate the fundamental nature of acceleration and velocity for a moving particle, regardless of the coordinate system in which we describe its motion.</p>
+<p><strong>Example 1 - Circular Orbital Motion</strong><br />
+We may consider the following simple example of describing motion in spherical coordinates. A particle of mass <span class="math notranslate nohighlight">\( m \)</span> follows a circular orbit of constant radius <span class="math notranslate nohighlight">\( r_0 \)</span> with respect to the centre of a spherically symmetric planet of mass <span class="math notranslate nohighlight">\( M \)</span>. For simplicity, we consider part of such an orbit where <span class="math notranslate nohighlight">\( \phi \)</span> is constant. The only force on the orbiting particle is in the radial direction towards the planet centre, and has magnitude <span class="math notranslate nohighlight">\( \frac{GMm}{r_0^2} \)</span> where <span class="math notranslate nohighlight">\( G \)</span> is the classical gravitational constant. In vector notation, the force is</p>
+<div class="math notranslate nohighlight">
+\[\vec{F} = -\frac{GMm}{r_0^2} \vec{e_r}\]</div>
+<p>and so the acceleration is</p>
+<div class="math notranslate nohighlight">
+\[\vec{a} = \frac{\vec{F}}{m} = -\frac{GM}{r_0^2} \vec{e_r}\]</div>
+<p>But we know from our general acceleration formula that the radial acceleration must also be equal to</p>
+<div class="math notranslate nohighlight">
+\[a_r = \ddot{r} - r \dot{\theta}^2 = -r_0 \dot{\theta}^2\]</div>
+<p>Hence:</p>
+<div class="math notranslate nohighlight">
+\[r_0 \dot{\theta}^2 = \frac{GM}{r_0^2} \rightarrow \dot{\theta} = \pm \sqrt{\frac{GM}{r_0^3}}\]</div>
+<p>which means the particle has constant angular velocity, and completes one orbit in a time given by</p>
+<div class="math notranslate nohighlight">
+\[T = \frac{2\pi}{|\dot{\theta}|} = \sqrt{\frac{4\pi^2}{GM}} r_0^{3/2}\]</div>
+<p>This is a simple example of one of Kepler’s laws of gravitational motion. Note that the conditions of constant <span class="math notranslate nohighlight">\( \dot{\theta} \)</span> and constant <span class="math notranslate nohighlight">\( \phi \)</span> for this simple example confirm that <span class="math notranslate nohighlight">\( a_{\theta} \)</span> and <span class="math notranslate nohighlight">\( a_{\phi} \)</span> do indeed evaluate to zero, as required.</p>
+<hr class="docutils" />
+<p><strong>Example 2 - Elliptical Motion</strong><br />
+This problem comes from Chapter 1 in the book by Fowles and Cassiday. A small ball is fastened to a long rubber band and twirled around in such a way that the ball moves in an elliptical path, given by the equation:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}(t) = \vec{e_x} b \cos(\omega t) + \vec{e_y} 2b \sin(\omega t)\]</div>
+<p>where <span class="math notranslate nohighlight">\( b \)</span> and <span class="math notranslate nohighlight">\( \omega \)</span> are constants.</p>
+<p>To find the speed <span class="math notranslate nohighlight">\( v \)</span> (velocity magnitude) of the ball, we simply differentiate once with respect to time, noting that the Cartesian unit vectors stay constant with time along the particle trajectory described:</p>
+<div class="math notranslate nohighlight">
+\[\vec{r}'(t) = -\vec{e_x} b \omega \sin(\omega t) + \vec{e_y} 2b \omega \cos(\omega t)\]</div>
+<p>Hence</p>
+<div class="math notranslate nohighlight">
+\[v(t) = |\vec{r}'(t)| = b\omega \sqrt{\sin^2(\omega t) + 4 \cos^2(\omega t)} = b\omega \sqrt{1 + 3\cos^2(\omega t)}\]</div>
+<p>Now, if we wish to calculate the distance of the ball from the origin as a function of time, this is simply the magnitude <span class="math notranslate nohighlight">\( r(t) \)</span> of the given vector function <span class="math notranslate nohighlight">\( \vec{r}(t) \)</span>, which is</p>
+<div class="math notranslate nohighlight">
+\[r(t) = b \sqrt{1 + 3\sin^2(\omega t)}\]</div>
+<p>We note that <span class="math notranslate nohighlight">\( \frac{dr}{dt} \propto \sin{\omega t} \cos{\omega t} \)</span>, which means that <span class="math notranslate nohighlight">\( \frac{dr}{dt} = 0 \)</span> at times <span class="math notranslate nohighlight">\( t=0 \)</span> and <span class="math notranslate nohighlight">\( t=\frac{\pi}{2\omega} \)</span>. These times therefore represent two instants when the ball is at its minimum and maximum distance from the origin, respectively.</p>
+<p>We note that, for <span class="math notranslate nohighlight">\( t=0 \)</span> (minimum distance from origin, <span class="math notranslate nohighlight">\( r_{min}=b \)</span>), <span class="math notranslate nohighlight">\( v = 2\omega b \)</span>. And for <span class="math notranslate nohighlight">\( t=\frac{\pi}{2\omega} \)</span> (maximum distance from origin, <span class="math notranslate nohighlight">\( r_{max} = 2b \)</span>), <span class="math notranslate nohighlight">\( v = \omega b \)</span>. Speed declines with increasing distance.</p>
+<p>Further exercises and problems based on the material in this unit will be attempted and discussed in the problem-solving tutorials.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-functions-describing-velocity-and-acceleration-of-a-moving-particle">Vector Functions Describing Velocity and Acceleration of a Moving Particle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-circular-motion">Example: Circular Motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rolling-wheel">Example: Rolling Wheel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-acceleration-with-three-dimensional-spatial-coordinates">Velocity and Acceleration with Three-Dimensional Spatial Coordinates</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cylindrical-coordinates">Cylindrical Coordinates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spherical-coordinates">Spherical Coordinates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

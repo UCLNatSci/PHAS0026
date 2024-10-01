@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Variation of Parameters &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'variationofparameters';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Laplace Transform" href="Laplacian.html" />
+    <link rel="prev" title="Independence of Functions" href="independent_functions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to PHAS0026 - Mathematical Methods for Theoretical Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ODEs.html">Linear Ordinary Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="independent_functions.html">Independence of Functions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Variation of Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Laplacian.html">Laplace Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="greensfunction.html">Green’s Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fvariationofparameters.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/variationofparameters.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Variation of Parameters</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-systems">First order systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-systems">Second order systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-case">The General Case</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-n-2">Example: <span class="math notranslate nohighlight">\( n = 2 \)</span></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="variation-of-parameters">
+<h1>Variation of Parameters<a class="headerlink" href="#variation-of-parameters" title="Permalink to this heading">#</a></h1>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>The variation of parameters method can be used to solve <span class="math notranslate nohighlight">\(n^{th}\)</span> degree linear  ODEs of the form:</p>
+<div class="math notranslate nohighlight">
+\[y^{(n)}(x) + \sum^{n-1}_{i=0} a_i(x)\,y^{(i)}(x) = f(x)\]</div>
+<p>which can be shown to have the solution:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^{n} u_i(x)\, \int \frac{W_i(x)}{W(x)}\,\mathrm{d}x\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_i(x),\, i \in \{1,\, 2,\, \dots,\, n\}\)</span> are the the homogeneous solutions of the ODE, <span class="math notranslate nohighlight">\(W(x)\)</span> is the Wronskian of these homogeneous solutions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}W \Big(u_{1}, \ldots ,u_{n}\Big)=
+\begin{vmatrix}
+u_{1}(x) &amp; u_{2}(x) &amp; \cdots &amp; u_{n}(x)\\
+u_{1}'(x) &amp; u_{2}'(x) &amp; \cdots &amp; u_{n}'(x)\\
+\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\
+u_{1}^{(n-1)}(x) &amp; u_{2}^{(n-1)}(x) &amp; \cdots &amp; u_{n}^{(n-1)}(x)
+\end{vmatrix}\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(W_i(x)\)</span> is the reduced Wronskian:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}W_i(x) = \begin{vmatrix}
+u_{1}(x) &amp; u_{2}(x) &amp; \cdots &amp; 0 &amp; \cdots &amp; u_{n}(x)\\
+u_{1}'(x) &amp; u_{2}'(x) &amp; \cdots &amp; 0&amp; \cdots &amp; u_{n}'(x)\\
+\vdots &amp;\vdots &amp;\ddots &amp;\vdots &amp;\vdots &amp;\vdots \\
+u_{1}^{(n-1)}(x) &amp; u_{2}^{(n-1)}(x) &amp; \cdots &amp; f(x)&amp; \cdots &amp; u_{n}^{(n-1)}(x)
+\end{vmatrix}\end{split}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(i^{th}\)</span> column of the Wronskian <span class="math notranslate nohighlight">\(W(x)\)</span> has been replaced with:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}
+0 \\ 0 \\ \vdots \\ f(x)
+\end{pmatrix}\end{split}\]</div>
+</div>
+<section id="first-order-systems">
+<h2>First order systems<a class="headerlink" href="#first-order-systems" title="Permalink to this heading">#</a></h2>
+<p>If we start with a general first order linear ODE:</p>
+<div class="math notranslate nohighlight" id="equation-inhomofirstorder">
+<span class="eqno">(1)<a class="headerlink" href="#equation-inhomofirstorder" title="Permalink to this equation">#</a></span>\[y’ + p(x)\,y = q(x)\]</div>
+<p>we can think of this a sourced first order problem, so the homogenous equation is:</p>
+<div class="math notranslate nohighlight">
+\[y’ + p(x)\,y = 0\]</div>
+<p>which we can solve, for instance with separation of variables:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\int \frac{1}{y}\,\mathrm{d}y &amp;= - \int p\,\mathrm{d}x\\
+\ln(y) &amp;= - \int p\,\mathrm{d}x + \ln(y_0) \\
+y_h &amp;= y_0\,e^{- \int p\,\mathrm{d}x}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_0\)</span> is a constant.</p>
+<p>Now we can use this homogeneous solution <span class="math notranslate nohighlight">\(y_h(x)\)</span> to solve for the inhomogeneous case <span class="math notranslate nohighlight">\(y_p(x)\)</span>, by multiplying this solution with a (yet unknown) function <span class="math notranslate nohighlight">\(C(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y_p = C(x)\,e^{- \int p\,\mathrm{d}x}\]</div>
+<p>If we substitute this back into <a class="reference internal" href="#equation-inhomofirstorder">(1)</a> we will find:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp; C’(x)\,e^{- \int p\,\mathrm{d}x} - C(x)\,p(x)\,e^{- \int p\,\mathrm{d}x} + p(x)\, C(x)\,e^{- \int p\,\mathrm{d}x} = q(x)\\
+&amp; \Rightarrow C’(x)\,e^{- \int p\,\mathrm{d}x} = q(x)\end{split}\]</div>
+<p>which by straight integration means that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C(x) &amp;= \int q(x)\, e^{\int p\,\mathrm{d}x}\,\mathrm{d}x \\
+\Rightarrow y_p &amp;= e^{- \int p\,\mathrm{d}x}\,\int q(x)\, e^{\int p\,\mathrm{d}x}\,\mathrm{d}x\end{split}\]</div>
+<p>and so the final solution is given by the sum of:</p>
+<div class="math notranslate nohighlight">
+\[y = y_h + y_p =  e^{- \int p\,\mathrm{d}x}\,\Big(\int q(x)\, e^{\int p\,\mathrm{d}x}\,\mathrm{d}x + y_0\Big)\]</div>
+<p>which we have seen before with integrating factors for first order systems.</p>
+</section>
+<section id="second-order-systems">
+<h2>Second order systems<a class="headerlink" href="#second-order-systems" title="Permalink to this heading">#</a></h2>
+<p>Let’s begin again with the form of the inhomogeneous second order equation:</p>
+<div class="math notranslate nohighlight">
+\[L\,y(x) = y^{\prime\prime}(x)+p(x)\,y^{\prime}(x)+q(x)\,y(x) = r(x)\]</div>
+<p>firstly we aim to solve the homogeneous equation:</p>
+<div class="math notranslate nohighlight">
+\[L\,y(x) = y^{\prime\prime}(x)+p(x)\,y^{\prime}(x)+q(x)\,y(x) = 0\]</div>
+<p>which will admit solutions <span class="math notranslate nohighlight">\(u_1(x),\, u_2(x)\)</span>. Hence we will construct a solution to the general equation of the form:</p>
+<div class="math notranslate nohighlight" id="equation-cond1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-cond1" title="Permalink to this equation">#</a></span>\[y(x) = A(x)\,u_1(x) + B(x)\,u_2(x)\]</div>
+<p>We note that if <span class="math notranslate nohighlight">\(A(x),\, B(x)\)</span> here were just constants, then this would be a linear superposition of the homogeneous solutions - therefore in general these
+should contain some additive constant with each function.  In order to have two equations with two unknowns, we need to enforce a separate condition on <span class="math notranslate nohighlight">\(A(x),\, B(x)\)</span>,
+as we will see the most helpful condition to simplify later algebra turns out to be:</p>
+<div class="math notranslate nohighlight" id="equation-cond2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-cond2" title="Permalink to this equation">#</a></span>\[A'(x)\,u_1(x) + B'(x)\,u_2(x) = 0\]</div>
+<p>If we try to constuct the form of <a class="reference internal" href="ODEreduction.html#equation-ode2general">()</a> using <a class="reference internal" href="#equation-cond1">(2)</a>, we will find:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y'(x) &amp;= \Big(A(x)\,u_1(x) + B(x)\,u_2(x)\Big)' \\
+&amp;= A'(x)\,u_1(x) + B'(x)\,u_2(x) + A(x)\,u_1'(x) + B(x)\,u_2'(x)\\
+&amp;= A(x)\,u_1'(x) + B(x)\,u_2'(x)\end{split}\]</div>
+<p>where we have used our condition <a class="reference internal" href="#equation-cond2">(3)</a> to reach the final line.  Likewise for second derivatives:</p>
+<div class="math notranslate nohighlight">
+\[y''(x) = A(x)\,u_1''(x) + B(x)\,u_2''(x) + A'(x)\,u_1'(x) + B'(x)\,u_2'(x)\]</div>
+<p>and so using the linear derivative operator:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L\, y(x) &amp;= A(x)\,u_1''(x) + B(x)\,u_2''(x) + A'(x)\,u_1'(x) + B'(x)\,u_2'(x) \\ &amp;+ p(x)\,(A(x)\,u_1'(x) + B(x)\,u_2'(x)) \\ &amp;+ q(x)\,(A(x)\,u_1(x) + B(x)\,u_2(x)) = f(x)\\
+&amp;= A(x)(u''(x) + u'(x) + u(x)) + B(x)(u''(x) + u'(x) + u(x)) \\
+&amp;+ A'(x)\,u_1'(x) + B'(x)\,u_2'(x)\\
+&amp;= A'(x)\,u_1'(x) + B'(x)\,u_2'(x) + A'(x)\,L\,u_1(x) + B'(x)\,L\,u_2(x)\\
+&amp;= A'(x)\,u_1'(x) + B'(x)\,u_2'(x)\end{split}\]</div>
+<p>where we have used the fact that the terms with <span class="math notranslate nohighlight">\(A(x),\, B(x)\)</span> coefficients are actually just the homogeneous equations, hence they equal zero.  So this leaves a coupled ODE system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A'(x)\,u_1(x) + B'(x)\,u_2(x) &amp;= 0\\
+A'(x)\,u_1'(x) + B'(x)\,u_2'(x) &amp;= r(x)\end{split}\]</div>
+<p>which if we write as a matrix system <span class="math notranslate nohighlight">\(W(x)\,a = b\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}
+u_1(x) &amp; u_2(x) \\
+u_1'(x) &amp; u_2'(x)
+\end{pmatrix}
+\begin{pmatrix}
+A'(x) \\
+B'(x)
+\end{pmatrix} = 
+\begin{pmatrix}
+0 \\
+r(x)
+\end{pmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(W(x)\)</span> is the Wronskian of the system.</p>
+<p>So to find the solutions <span class="math notranslate nohighlight">\(a = W^{-1}\,b\)</span> we can invert this matrix as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{pmatrix}
+A'(x) \\
+B'(x)
+\end{pmatrix} = \frac{1}{W}\begin{pmatrix}
+u_2'(x) &amp; -u_2(x) \\
+-u_1'(x) &amp; u_1(x)
+\end{pmatrix}
+\begin{pmatrix}
+0 \\
+f(x)
+\end{pmatrix} = \frac{1}{W}\begin{pmatrix}
+-u_2(x)\,r(x) \\
+u_1(x)\,r(x)
+\end{pmatrix}\end{split}\]</div>
+<p>which means the final solutions can be found from:</p>
+<div class="math notranslate nohighlight" id="equation-varparsolns">
+<span class="eqno">(4)<a class="headerlink" href="#equation-varparsolns" title="Permalink to this equation">#</a></span>\[\begin{split}A(x) &amp;= -\int \frac{1}{W}\,u_2(x)\,r(x) \,\mathrm{d}x \\
+B(x) &amp;= \int \frac{1}{W}\,u_1(x)\,r(x) \,\mathrm{d}x \\\end{split}\]</div>
+<div class="seealso admonition">
+<p class="admonition-title">Worked example</p>
+<p>Lets try and solve the ODE:</p>
+<div class="math notranslate nohighlight">
+\[y'' + 4y' + 3y = \cosh(2x)\]</div>
+<p>subject to the conditions <span class="math notranslate nohighlight">\(y(0) = -\frac{7}{15}, \,y'(0)=\frac{1}{15}\)</span>.  We note that this could be solved with method of undetermined coefficients, but this
+means we can double check our results later!</p>
+<p>The solutions to the homoegenous ODE can be found from the ansatz <span class="math notranslate nohighlight">\(y = e^{\lambda\,x}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lambda^2 + 4\lambda + 3 = 0 &amp;\Rightarrow \lambda = -1,\, -3 \\
+u_1(x) &amp;= e^{-x} \\
+u_2(x) &amp;= e^{-3x}\end{split}\]</div>
+<p>which means that in order to construct the full solution:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = A(x)\,u_1(x) + B(x)\,u_2(x)\]</div>
+<p>We need the Wronskian <span class="math notranslate nohighlight">\(W(x)\)</span> of the system, here given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}W = \begin{vmatrix} 
+e^{-x} &amp; e^{-3x} \\
+-e^{-x} &amp; -3e^{-3x}
+\end{vmatrix} = -3e^{-4x} - (-e^{-4x}) = -2e^{-4x}\end{split}\]</div>
+<p>and so using <a class="reference internal" href="#equation-varparsolns">(4)</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A(x) &amp;= \frac{1}{2}\int e^{4x}\,e^{-3x}\,\cosh(2x) \,\mathrm{d}x  = \frac{1}{4}\int \Big(e^{3x}+e^{-x}\Big) \,\mathrm{d}x = \frac{1}{4}\Big(\frac{1}{3}e^{3x} - e^{-x}\Big) + C_1 \\
+B(x) &amp;= -\frac{1}{2}\int e^{4x}\,e^{-x}\,\cosh(2x) \,\mathrm{d}x = -\frac{1}{4}\int \Big(e^{5x} + e^{x}\Big) \,\mathrm{d}x = -\frac{1}{4}\Big(\frac{1}{5}e^{5x} + e^{x}\Big) + C_2\end{split}\]</div>
+<p>wher <span class="math notranslate nohighlight">\(C_1,\, C_2\)</span> are constants.  This means the final solution is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y &amp;= \Big(\frac{1}{12}e^{3x} - \frac{1}{4}e^{-x}\Big)e^{-x} - \Big(\frac{1}{20}e^{5x} - \frac{1}{4}e^{x}\Big)e^{-3x} + \Big(C_1\,e^{-x} + C_2\,e^{-3x}\Big) \\
+&amp;= \frac{1}{12}e^{2x} - \frac{1}{4}e^{-2x} - \frac{1}{20}e^{2x} - \frac{1}{4}e^{-2x} + \Big(C_1\,e^{-x} + C_2\,e^{-3x}\Big)\\
+&amp;= \frac{1}{60}\Big(2e^{2x} - 30e^{-2x} \Big) + \Big(C_1\,e^{-x} + C_2\,e^{-3x}\Big)\end{split}\]</div>
+<p>Given the initial conditions, we find that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y(0) &amp;= \frac{-28}{60} + \Big(C_1 + C_2\Big) = -\frac{7}{15} \Rightarrow C_1 + C_2 = 0\\
+y'(x) &amp;= \frac{1}{60}\Big(4e^{2x} + 60e^{-2x} \Big) + \Big(-C_1\,e^{-x} -3 C_2\,e^{-3x}\Big)\\
+y'(0) &amp;= \frac{64}{60} + \Big(-C_1 - 3C_2\Big) = \frac{1}{15} \Rightarrow -C_1 - 3C_2 = -1\end{split}\]</div>
+<p>which we can solve as <span class="math notranslate nohighlight">\(C_1 = 1/2,\, C_2 = -1/2\)</span>, which gives final solutions as:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = \frac{1}{30}\Big(e^{2x} - 15e^{-2x} +15e^{-x} - 15 \,e^{-3x}\Big)\]</div>
+<p>which we can check gives the right answer as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y(x) &amp;= \frac{1}{30}\Big(e^{2x} - 15e^{-2x} +15e^{-x} - 15 \,e^{-3x}\Big)\\
+y'(x) &amp;= \frac{1}{30}\Big(2e^{2x} + 30e^{-2x} - 15e^{-x} + 45 \,e^{-3x}\Big)\\
+y''(x) &amp;= \frac{1}{30}\Big(4e^{2x} - 60e^{-2x} + 15e^{-x} - 135 \,e^{-3x}\Big) \\
+\Rightarrow y'' + 4y' + 3y &amp;= \frac{1}{30}\Big[(4+8+3)e^{2x} + (-60 + 120 -45) e^{-2x} \\
+&amp;+ (15-60+45)e^{-x} + (-135+180-45)\,e^{-3x}\Big] \\
+&amp;= \frac{1}{30}\Big(15e^{2x} + 15 e^{-2x}\Big) = \cosh(2x)\end{split}\]</div>
+<p>and so the solutions are correct!</p>
+</div>
+</section>
+<section id="the-general-case">
+<h2>The General Case<a class="headerlink" href="#the-general-case" title="Permalink to this heading">#</a></h2>
+<p>Let us solve the ODE:</p>
+<div class="math notranslate nohighlight">
+\[a_n(x) y^{(n)} + a_{n-1}(x) y^{(n-1)} + \dots + a_1(x) y' + a_0(x) y = f(x)\]</div>
+<p>where the coefficients <span class="math notranslate nohighlight">\( a_i(x) \)</span> may or may not be functions of <span class="math notranslate nohighlight">\( x \)</span>. First, assume that the complementary solution of the homogeneous equation:</p>
+<div class="math notranslate nohighlight">
+\[a_n(x) y^{(n)} + a_{n-1}(x) y^{(n-1)} + \dots + a_1(x) y' + a_0(x) y = 0\]</div>
+<p>is known and is represented as:</p>
+<div class="math notranslate nohighlight">
+\[y_c(x) = c_1 y_1(x) + c_2 y_2(x) + \dots + c_n y_n(x)\]</div>
+<p>where <span class="math notranslate nohighlight">\( c_i \)</span> are constants and <span class="math notranslate nohighlight">\( y_i(x) \)</span> are known linearly independent functions.</p>
+<p>We now consider a particular solution of the inhomogeneous equation in the form:</p>
+<div class="math notranslate nohighlight">
+\[y_p(x) = k_1(x) y_1(x) + k_2(x) y_2(x) + \dots + k_n(x) y_n(x)\]</div>
+<p>where the coefficients <span class="math notranslate nohighlight">\( k_i(x) \)</span> are, in general, functions of <span class="math notranslate nohighlight">\( x \)</span>. These functions can be determined by imposing <span class="math notranslate nohighlight">\( n \)</span> non-equivalent conditions. The ODE itself gives one of these conditions. How to choose the others?</p>
+<section id="example-n-2">
+<h3>Example: <span class="math notranslate nohighlight">\( n = 2 \)</span><a class="headerlink" href="#example-n-2" title="Permalink to this heading">#</a></h3>
+<p>Consider the equation:</p>
+<div class="math notranslate nohighlight">
+\[a_2(x) y'' + a_1(x) y' + a_0(x) y = f(x)\]</div>
+<p>Assume that the solutions of the corresponding homogeneous equation <span class="math notranslate nohighlight">\( y_1(x) \)</span> and <span class="math notranslate nohighlight">\( y_2(x) \)</span> are known. Then:</p>
+<div class="math notranslate nohighlight">
+\[y_c(x) = c_1 y_1(x) + c_2 y_2(x)\]</div>
+<p>is the complementary function. We now seek a particular solution in the form:</p>
+<div class="math notranslate nohighlight">
+\[y_p(x) = k_1(x) y_1(x) + k_2(x) y_2(x)\]</div>
+<p>Substitute <span class="math notranslate nohighlight">\( y_p(x) \)</span> into the original equation:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = a_0 (k_1 y_1 + k_2 y_2) + a_1 (k_1' y_1 + k_2' y_2 + k_1 y_1' + k_2 y_2') + a_2 (k_1'' y_1 + k_2'' y_2 + k_1' y_1' + k_2' y_2')\]</div>
+<p>If we impose the conditions:</p>
+<div class="math notranslate nohighlight">
+\[k_1' y_1 + k_2' y_2 = 0\]</div>
+<div class="math notranslate nohighlight">
+\[f(x) = a_2 (k_1' y_1' + k_2' y_2')\]</div>
+<p>we find that:</p>
+<div class="math notranslate nohighlight">
+\[k_1'(x) = -k_2'(x) \frac{y_2(x)}{y_1(x)}\]</div>
+<p>This process continues until we obtain the functions <span class="math notranslate nohighlight">\( k_1(x) \)</span> and <span class="math notranslate nohighlight">\( k_2(x) \)</span>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="independent_functions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Independence of Functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Laplacian.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Laplace Transform</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-order-systems">First order systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-systems">Second order systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-case">The General Case</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-n-2">Example: <span class="math notranslate nohighlight">\( n = 2 \)</span></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,934 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Linear Ordinary Differential Equations &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ODEs';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Independence of Functions" href="independent_functions.html" />
+    <link rel="prev" title="Welcome to PHAS0026 - Mathematical Methods for Theoretical Physics" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to PHAS0026 - Mathematical Methods for Theoretical Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Ordinary Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="independent_functions.html">Independence of Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variationofparameters.html">Variation of Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Laplacian.html">Laplace Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="greensfunction.html">Green’s Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FODEs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ODEs.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Ordinary Differential Equations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-differential-equation-ode">Ordinary Differential Equation (ODE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-differential-equation-pde">Partial Differential Equation (PDE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-ordinary-differential-equation">Linear Ordinary Differential Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-first-order-ode">Linear First-Order ODE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homogeneous-first-order-ode">Homogeneous First-Order ODE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inhomogeneous-first-order-ode">Inhomogeneous First-Order ODE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-second-order-homogeneous-equations">Linear Second-Order Homogeneous Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roots-of-the-characteristic-equation">Roots of the Characteristic Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#case-1-lambda-1-neq-lambda-2">Case 1: <span class="math notranslate nohighlight">\( \lambda_1 \neq \lambda_2 \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#case-2-lambda-1-2-a-pm-ib">Case 2: <span class="math notranslate nohighlight">\( \lambda_{1,2} = a \pm ib \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#case-3-lambda-1-lambda-2">Case 3: <span class="math notranslate nohighlight">\( \lambda_1 = \lambda_2 \)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-coefficients-euler-equations">Varying Coefficients - Euler Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ranges-of-x">Other ranges of <span class="math notranslate nohighlight">\(x\)</span></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-ordinary-differential-equations">
+<h1>Linear Ordinary Differential Equations<a class="headerlink" href="#linear-ordinary-differential-equations" title="Permalink to this heading">#</a></h1>
+<p>Differential equations crop up all the time in Physics, so it worth us spending some time to learn many different techniques for solving them.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Some examples</p>
+<p><strong>Newtonian Mechanics</strong></p>
+<p>Motion of a point mass <span class="math notranslate nohighlight">\(m\)</span> subjected to an external force <span class="math notranslate nohighlight">\(F\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}^2 r}{dt^2} = a = \frac{1}{m}F\]</div>
+<p><strong>Quantum Mechanics</strong></p>
+<p>Schrodinger equation:</p>
+<div class="math notranslate nohighlight">
+\[i \frac{\partial \psi}{\partial t} = \hat{H} \psi \quad (i = \sqrt{-1})\]</div>
+<p><strong>Electrical Circuits</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(R\)</span>, <span class="math notranslate nohighlight">\(C\)</span>, and <span class="math notranslate nohighlight">\(L\)</span> be parameters of the circuit in the figure below:</p>
+<p><img alt="Electric Circuit" src="_images/LCR.png" /></p>
+<p>The charge on the capacitor <span class="math notranslate nohighlight">\(q(t)\)</span> is a function of time <span class="math notranslate nohighlight">\(t\)</span>. To find the dependence of the current <span class="math notranslate nohighlight">\(I\)</span> on time, find the total voltage drop along the circuit:</p>
+<div class="math notranslate nohighlight">
+\[V(t) = L \frac{\mathrm{d}I(t)}{dt} + R I(t) + \frac{q(t)}{C}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(I(t) = \frac{\mathrm{d}q(t)}{dt}\)</span>, after differentiating with respect to <span class="math notranslate nohighlight">\(t\)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[L \frac{\mathrm{d}^2 I(t)}{dt^2} + R \frac{\mathrm{d}I(t)}{dt} + \frac{I(t)}{C} = \frac{\mathrm{d}V(t)}{dt}\]</div>
+<p>In general, coefficients may also depend on a variable:</p>
+<div class="math notranslate nohighlight">
+\[A(x) \frac{\mathrm{d}^2 y(x)}{\,\mathrm{d}x^2} + B(x) \frac{\mathrm{d}y(x)}{\,\mathrm{d}x} + C(x)y(x) = D(x)\]</div>
+</div>
+<section id="definitions">
+<h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this heading">#</a></h2>
+<section id="ordinary-differential-equation-ode">
+<h3>Ordinary Differential Equation (ODE)<a class="headerlink" href="#ordinary-differential-equation-ode" title="Permalink to this heading">#</a></h3>
+<p>An ordinary differential equation (ODE) is a relation between a function of one variable <span class="math notranslate nohighlight">\(u(x)\)</span>, the variable <span class="math notranslate nohighlight">\(x\)</span>, and the function’s first and higher derivatives with respect to the variable <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}u}{\,\mathrm{d}x}, \frac{\mathrm{d}^2 u}{\,\mathrm{d}x^2}, \ldots\]</div>
+<p>For example:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}^2 y(x)}{\mathrm{d}t^2} = \frac{1}{m}f(x)\]</div>
+</section>
+<section id="partial-differential-equation-pde">
+<h3>Partial Differential Equation (PDE)<a class="headerlink" href="#partial-differential-equation-pde" title="Permalink to this heading">#</a></h3>
+<p>A partial differential equation (PDE) is a relation between a function of several variables <span class="math notranslate nohighlight">\(u(x_1, x_2, \ldots, x_N)\)</span>, variables <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_N\)</span>, and the function’s first and higher derivatives with respect to these variables:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial x_k}, \frac{\partial^2 u}{\partial x_k \partial x_n}, \ldots\]</div>
+</section>
+<section id="linear-ordinary-differential-equation">
+<h3>Linear Ordinary Differential Equation<a class="headerlink" href="#linear-ordinary-differential-equation" title="Permalink to this heading">#</a></h3>
+<p>A linear ordinary differential equation is a relation of the form:</p>
+<div class="math notranslate nohighlight">
+\[a_0(x) y(x) + a_1(x) y'(x) + a_2(x) y''(x) + a_3(x) y'''(x) + \ldots = b(x)\]</div>
+<p>This definition is valid for any order of the DE. Coefficients <span class="math notranslate nohighlight">\(a_k\)</span> (for <span class="math notranslate nohighlight">\(k = 0,1, \ldots\)</span>) and <span class="math notranslate nohighlight">\(b\)</span> may or may not be functions of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>Linear: <span class="math notranslate nohighlight">\(y' + 5 = -6y\)</span></p></li>
+<li><p>Non-linear: <span class="math notranslate nohighlight">\(yy' + 5 = -6y\)</span>, <span class="math notranslate nohighlight">\(y'^2 + 5 = 6xy\)</span>, <span class="math notranslate nohighlight">\(y' + 5 = -\sin(6y)\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="linear-first-order-ode">
+<h2>Linear First-Order ODE<a class="headerlink" href="#linear-first-order-ode" title="Permalink to this heading">#</a></h2>
+<p>The purpose of this section is to obtain the general solution of the equation:</p>
+<div class="math notranslate nohighlight">
+\[y'(x) + P(x) y(x) = Q(x)\]</div>
+<p>For simplicity, we will write <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(P\)</span>, and <span class="math notranslate nohighlight">\(Q\)</span> instead of <span class="math notranslate nohighlight">\(y(x)\)</span>, <span class="math notranslate nohighlight">\(P(x)\)</span>, and <span class="math notranslate nohighlight">\(Q(x)\)</span>.</p>
+<section id="homogeneous-first-order-ode">
+<h3>Homogeneous First-Order ODE<a class="headerlink" href="#homogeneous-first-order-ode" title="Permalink to this heading">#</a></h3>
+<p>First, consider the case where <span class="math notranslate nohighlight">\(Q(x) = 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y' + P y = 0\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}y}{\,\mathrm{d}x} = -P y\]</div>
+<p>This equation is separable:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}y}{y} = -P \,\mathrm{d}x\]</div>
+<p>The solution can be obtained by integrating both parts:</p>
+<div class="math notranslate nohighlight">
+\[\ln(y) = -\int P \,\mathrm{d}x + C\]</div>
+<p>where <span class="math notranslate nohighlight">\(C\)</span> is a constant. Thus, <span class="math notranslate nohighlight">\(y\)</span> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = e^{-\int P(x) \,\mathrm{d}x + C} = e^C e^{-\int P(x) \,\mathrm{d}x} = A e^{-\int P(x) \,\mathrm{d}x}\]</div>
+<p>where <span class="math notranslate nohighlight">\(A = e^C\)</span> is a constant. It is convenient to introduce the function <span class="math notranslate nohighlight">\(S(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[S(x) = \int P(x) \,\mathrm{d}x\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}S(x)}{\,\mathrm{d}x} = P(x)\]</div>
+<p>Then:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = A e^{-S(x)}\]</div>
+<p>or:</p>
+<div class="math notranslate nohighlight">
+\[y(x) e^{S(x)} = A\]</div>
+<p>By differentiating both sides of this equation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\,\mathrm{d}x} \left( y e^{S(x)} \right) = y' e^{S(x)} + y e^{S(x)} \frac{\mathrm{d}S}{\,\mathrm{d}x} = e^{S(x)} (y' + P y) = 0\]</div>
+</section>
+<section id="inhomogeneous-first-order-ode">
+<h3>Inhomogeneous First-Order ODE<a class="headerlink" href="#inhomogeneous-first-order-ode" title="Permalink to this heading">#</a></h3>
+<p>For the inhomogeneous equation:</p>
+<div class="math notranslate nohighlight">
+\[y'(x) + P(x) y(x) = Q(x)\]</div>
+<p>We can use this form of the perfect derivative to rewrite this equation as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\,\mathrm{d}x} \left( y e^{S(x)} \right) = e^{S(x)} (y' + P y) = e^{S(x)} Q\]</div>
+<p>where <span class="math notranslate nohighlight">\(e^{S(x)} = e^{\int p \,\mathrm{d}x}\)</span> is known as the <strong>integrating factor</strong>.</p>
+<p>Integration of both sides with respect to <span class="math notranslate nohighlight">\(x\)</span> gives:</p>
+<div class="math notranslate nohighlight">
+\[y(x) e^{S(x)} = \int Q(x) e^{S(x)} \,\mathrm{d}x + C\]</div>
+<p>Thus, the general solution of the linear first-order DE is:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = e^{-S(x)} \left( \int Q(x) e^{S(x)} \,\mathrm{d}x + C \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(S(x) = \int P(x) \,\mathrm{d}x\)</span>.</p>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<p>Find the solution of:</p>
+<div class="math notranslate nohighlight">
+\[y' + y = e^x\]</div>
+<p>In our notation, <span class="math notranslate nohighlight">\(P(x) = 1\)</span> and <span class="math notranslate nohighlight">\(Q(x) = e^x\)</span>. First, consider the homogeneous equation and find <span class="math notranslate nohighlight">\(S(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[S(x) = \int P(x) \,\mathrm{d}x = x \quad \text{and} \quad y(x) = A e^{-x}\]</div>
+<p>For the inhomogeneous equation:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = e^{-x} \left( \int e^x e^x \,\mathrm{d}x + C \right) = e^{-x} \left( \frac{1}{2} e^{2x} + C \right) = \frac{1}{2} e^x + C e^{-x}\]</div>
+</section>
+</section>
+<section id="linear-second-order-homogeneous-equations">
+<h2>Linear Second-Order Homogeneous Equations<a class="headerlink" href="#linear-second-order-homogeneous-equations" title="Permalink to this heading">#</a></h2>
+<p>Consider homogeneous equations with constant coefficients:</p>
+<div class="math notranslate nohighlight">
+\[a_2 \frac{\mathrm{d}^2 y}{\,\mathrm{d}x^2} + a_1 \frac{\mathrm{d}y}{\,\mathrm{d}x} + a_0 y = 0\]</div>
+<p>Let <span class="math notranslate nohighlight">\(D\)</span> denote the differential operation <span class="math notranslate nohighlight">\(D = \frac{\mathrm{d}}{\,\mathrm{d}x}\)</span>. Then, the above ODE can be rewritten as:</p>
+<div class="math notranslate nohighlight">
+\[a_2 D^2 y + a_1 D y + a_0 y = a_2 (D - \lambda_1)(D - \lambda_2)y = 0\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span> are roots of the characteristic equation:</p>
+<div class="math notranslate nohighlight">
+\[\lambda^2 + \frac{a_1}{a_2} \lambda + \frac{a_0}{a_2} = 0\]</div>
+<p>with respect to <span class="math notranslate nohighlight">\(\lambda\)</span>. The solutions of this equation are:</p>
+<div class="math notranslate nohighlight">
+\[y_1 = c_1 e^{\lambda_1 x} \quad \text{and} \quad y_2 = c_2 e^{\lambda_2 x}\]</div>
+<section id="roots-of-the-characteristic-equation">
+<h3>Roots of the Characteristic Equation<a class="headerlink" href="#roots-of-the-characteristic-equation" title="Permalink to this heading">#</a></h3>
+<p>To solve a second-order ODE, we first need to find the roots of the corresponding characteristic equation. This equation is quadratic and may have three types of solutions:</p>
+<ol class="arabic simple">
+<li><p>Two different real roots <span class="math notranslate nohighlight">\( \lambda_1 \neq \lambda_2 \)</span></p></li>
+<li><p>Complex conjugate roots <span class="math notranslate nohighlight">\( \lambda_{1,2} = a \pm ib \)</span></p></li>
+<li><p>Two identical real roots <span class="math notranslate nohighlight">\( \lambda_1 = \lambda_2 = \lambda \)</span></p></li>
+</ol>
+<section id="case-1-lambda-1-neq-lambda-2">
+<h4>Case 1: <span class="math notranslate nohighlight">\( \lambda_1 \neq \lambda_2 \)</span><a class="headerlink" href="#case-1-lambda-1-neq-lambda-2" title="Permalink to this heading">#</a></h4>
+<p>The general solution is a superposition of the two individual solutions:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = c_1 e^{\lambda_1 x} + c_2 e^{\lambda_2 x}\]</div>
+</section>
+<section id="case-2-lambda-1-2-a-pm-ib">
+<h4>Case 2: <span class="math notranslate nohighlight">\( \lambda_{1,2} = a \pm ib \)</span><a class="headerlink" href="#case-2-lambda-1-2-a-pm-ib" title="Permalink to this heading">#</a></h4>
+<p>For this case, the solution is:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = c_1 e^{\lambda_1 x} + c_2 e^{\lambda_2 x}\]</div>
+<p>Since <span class="math notranslate nohighlight">\( \lambda_1 \)</span> and <span class="math notranslate nohighlight">\( \lambda_2 \)</span> are related, we can rewrite this as:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = e^{a x} \left( A e^{ibx} + B e^{-ibx} \right)\]</div>
+<p>Using Euler’s formula <span class="math notranslate nohighlight">\( e^{\pm i \theta} = \cos \theta \pm i \sin \theta \)</span>, we can write the solution as:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = e^{a x} \left( C_1 \cos(bx) + C_2 \sin(bx) \right)\]</div>
+<p>Thus, the general solution for this case is:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = e^{a x} \left( C \sin(bx + \phi) \right)\]</div>
+</section>
+<section id="case-3-lambda-1-lambda-2">
+<h4>Case 3: <span class="math notranslate nohighlight">\( \lambda_1 = \lambda_2 \)</span><a class="headerlink" href="#case-3-lambda-1-lambda-2" title="Permalink to this heading">#</a></h4>
+<p>In this case, the differential equation can be written as:</p>
+<div class="math notranslate nohighlight">
+\[a_2 (D - \lambda)(D - \lambda) y = 0\]</div>
+<p>One solution is:</p>
+<div class="math notranslate nohighlight">
+\[y_1(x) = A e^{\lambda x}\]</div>
+<p>But there will still be another solution to this ODE, to find it consider the second solution having the form:</p>
+<div class="math notranslate nohighlight">
+\[y_2(x) = y_1(x)\, f(x)\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(x)\)</span> is a function to be found - we can think of <span class="math notranslate nohighlight">\(f(x)\)</span> here is a <strong>bridging</strong> function between the different
+solutions <span class="math notranslate nohighlight">\(y_1,\,y_2\)</span>.</p>
+<p>If we differentiate, we find:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y_2'(x) &amp;= y_1'(x)\,f(x) + y_1(x)\,f'(x) \\
+y_2''(x) &amp;= y_1''(x)\,f(x) + y_1'(x)\,f'(x) + y_1'(x)\,f'(x) + y_1(x)\,f''(x)   \\
+&amp;= y_1''(x)\,f(x) + 2y_1'(x)\,f'(x) + y_1(x)\,f''(x)\end{split}\]</div>
+<p>So if we substitute into the ODE and then group terms by common factors:</p>
+<div class="math notranslate nohighlight">
+\[f(x)\left[ a_2\,y_1''(x) + a_1\,y_1'(x) + a_0\,y_1(x) \right] 
++ f'(x)\left[ 2a_2\,y_1'(x) + a_1\,y_1(x)\right] + f''(x)\,y_1(x) = 0\]</div>
+<p>The first bracket will disappear as <span class="math notranslate nohighlight">\(y_1(x)\)</span> is a solution to the homogeneous equation.  The second bracket also disappears since in this case, with a repeated root <span class="math notranslate nohighlight">\(\lambda = \frac{-a_1}{2a_2}\)</span> and so:</p>
+<div class="math notranslate nohighlight">
+\[\lambda = \frac {y_1'(x)}{y_1(x)} = \frac{-a_1}{2a_2} \Rightarrow 2a_2\,y_1'(x) + a_1\,y_1(x)\]</div>
+<p>This leaves <span class="math notranslate nohighlight">\(f''(x)=0\)</span> and so integrating up:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f''(x) &amp;= 0\\
+f'(x) &amp;= C_1 \\
+f(x) &amp;= C_1\,x + C_2\end{split}\]</div>
+<p>Which means the full solution is:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = \left( C_1\,x + C_2\right)e^{\lambda\,x}\]</div>
+<p>We call this method of using known solutions to find unknown solutions <strong>Reduction of Order</strong> - typically we apply this to find solutions to homogeneous equations (we will encounter further methods to solve inhomogeneous equations later).</p>
+<p>Alternatively we can think of this as a sourced first order problem:</p>
+<div class="math notranslate nohighlight">
+\[u(x) = (D - \lambda) y(x)\]</div>
+<p>Then the equation becomes:</p>
+<div class="math notranslate nohighlight">
+\[(D - \lambda) u(x) = 0\]</div>
+<p>From this, we get:</p>
+<div class="math notranslate nohighlight">
+\[u(x) = B e^{\lambda x}\]</div>
+<p>Substituting this into <span class="math notranslate nohighlight">\( u = (D - \lambda) y \)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[B e^{\lambda x} = y' - \lambda y\]</div>
+<p>This is a first-order ODE, with the general solution:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = (B x + C) e^{\lambda x}\]</div>
+<p>So the general solution in this case is:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = (B x + C) e^{\lambda x}\]</div>
+</section>
+</section>
+</section>
+<section id="varying-coefficients-euler-equations">
+<h2>Varying Coefficients - Euler Equations<a class="headerlink" href="#varying-coefficients-euler-equations" title="Permalink to this heading">#</a></h2>
+<p>Up until now we have considered the case of constant coefficients in the second order differential case:</p>
+<div class="math notranslate nohighlight">
+\[a_2\,y''(x) + a_1\,y'(x) + a_0\,y(x) = f(x) \]</div>
+<p>But like in the first order problem case, there is nothing to stop us allowing varying coefficients:</p>
+<div class="math notranslate nohighlight">
+\[a_2(x)\,y''(x) + a_1(x)\,y'(x) + a_0(x)\,y(x) = f(x) 
+\]</div>
+<p>Whilst the space of functions we can choose for <span class="math notranslate nohighlight">\(a_2(x),\, a_1(x),\, a_0(x)\)</span> is vast, lets start by trying to solve problems of the form:</p>
+<div class="math notranslate nohighlight">
+\[ax^2\,y''(x) + bx^1\,y'(x) +c x^0 y(x)=0\]</div>
+<p>These are known as <strong>Euler Equations</strong>.</p>
+<p>We do so by using an ansatz of the form <span class="math notranslate nohighlight">\(y = x^n\)</span>, which means that:</p>
+<div class="math notranslate nohighlight">
+\[x^{n}\left( an(n-1) + bn + c\right) = 0\]</div>
+<p>A quadratic (which we call the characteristic equation) that we can solve:</p>
+<div class="math notranslate nohighlight">
+\[an^2 + (b-a)n + c = 0 \Rightarrow n = \frac{a-b \pm \sqrt{b^2-2ab + a^2 - 4ac}}{2a}\]</div>
+<p>which means there are three distinct cases to solve for here (to begin with assume <span class="math notranslate nohighlight">\(x &gt; 0\)</span> to avoid any additional
+complications with complex solutions)</p>
+<p>1. <em>Two distinct, real roots <span class="math notranslate nohighlight">\(n = n_1,\, n_2\)</span></em></p>
+<p>Since the ODE <a class="reference internal" href="ODEreduction.html#equation-eulereqn">()</a> here is linear, we can find the superposition of solutions:</p>
+<div class="math notranslate nohighlight">
+\[y = A\,x^{n_1} + B\,x^{n_2},\, \qquad n_1,\, n_2 \in \mathbb{R}\]</div>
+<p>2. <em>One repeated, real root <span class="math notranslate nohighlight">\(n\)</span></em></p>
+<p>We find that solving the characteristic equation, the only root is:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{a-b}{2a}\]</div>
+<p>giving a solution <span class="math notranslate nohighlight">\(y_1 = Ax^n\)</span>.  But there should be two solutions to the ODE <a class="reference internal" href="ODEreduction.html#equation-eulereqn">()</a>, so we can use an ansatz of
+the form:</p>
+<div class="math notranslate nohighlight">
+\[y_2 = x^{n}\,f(x)\]</div>
+<p>to find <span class="math notranslate nohighlight">\(y_2\)</span>, by solving for <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+<p>Using this ansatz, the ODE takes the form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y &amp;= x^n\,f \\
+y' &amp;= nx^{n-1}\,f + x^n\,f' \\
+y'' &amp;= n(n-1)x^{n-2}\,f + 2nx^{n-1}\,f' + x^{n}f''\\
+\Rightarrow ax^2\,y′′+bx\,y′+cy &amp;= ax^{n+1}\,f'' + (2an+b)\,x^{n+1}\,f' + (an(n-1) + bn + c)\,x^n\,f = 0\end{split}\]</div>
+<p>This can be simplified straight away since we are using the value of <span class="math notranslate nohighlight">\(n\)</span> which satisfies the characteristic equation
+<span class="math notranslate nohighlight">\(an(n-1) + bn + c = 0\)</span>, therefore the equation reduces to:</p>
+<div class="math notranslate nohighlight">
+\[ax^{n+1}\,f'' + (2an+b)\,x^{n+1}\,f' = 0 \]</div>
+<p>using the fact that <span class="math notranslate nohighlight">\(\displaystyle n = \frac{a-b}{2a} \Rightarrow 2an + b = a\)</span> means:</p>
+<div class="math notranslate nohighlight">
+\[ax^{n+1}\left(xf'' + f'\right) = 0\]</div>
+<p>which can be solved as a linear 1st order ODE in <span class="math notranslate nohighlight">\(f'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}x}\left( xf'\right) = 0 \Rightarrow xf' = A \]</div>
+<p>which means the form of <span class="math notranslate nohighlight">\(f(x)\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = A\ln(x) + B\]</div>
+<p>and therefore the solution here is:</p>
+<div class="math notranslate nohighlight">
+\[y = x^n\,\left(A \ln(x) + B\right)\]</div>
+<p>3. <em>Two complex roots <span class="math notranslate nohighlight">\(n = \lambda \pm i\mu\)</span></em></p>
+<p>We can solve the characteristic equation here, with the proviso <span class="math notranslate nohighlight">\((b-a)^2 - 4ac &lt; 0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{(a-b)\pm i\sqrt{4ac-(b-a)^2}}{2a} = \lambda \pm i \mu,\qquad \lambda,\, \mu \in \mathbb{R}\]</div>
+<p>If we look at the solutions here, lets start with <span class="math notranslate nohighlight">\(n = \lambda + i \mu\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y_1 = Ax^{\lambda + i\mu} = Ae^{\ln(x^{\lambda + i \mu})} = Ae^{(\lambda + i\mu)\ln(x)} = Ax^{\lambda}\left( \cos(\mu
+\ln(x)) + i \sin(\mu\ln(x))\right)\]</div>
+<p>where we have used the Euler function to convert this expression into one with trigonometric and power law functions.  We
+could do a similar exercise with <span class="math notranslate nohighlight">\(y_2\)</span>, the only difference here being a <span class="math notranslate nohighlight">\(-\)</span> sign in the middle, so the overall solution <span class="math notranslate nohighlight">\(y = y_1 + y_2\)</span> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[y = y_1 + y_2 = x^{\lambda}\left(A\cos(\mu\ln(x)) + B \sin(\mu\ln(x))\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(A,\, B \in \mathbb{C}\)</span> in general, but with real boundary conditions they will turn out to be real.</p>
+<section id="other-ranges-of-x">
+<h3>Other ranges of <span class="math notranslate nohighlight">\(x\)</span><a class="headerlink" href="#other-ranges-of-x" title="Permalink to this heading">#</a></h3>
+<p>So far we have taken <span class="math notranslate nohighlight">\(x&gt;0\)</span> to ensure all of our solutions here are real, however if we look again at the Euler equation,
+taking a coordinate transformation <span class="math notranslate nohighlight">\(t = -x\)</span> and defining a function <span class="math notranslate nohighlight">\(z\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[z(t) = y(x) = y(-t)\]</div>
+<p>then this means that:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{\mathrm{d}}{\mathrm{d}t} z(t) = \dot{z}(t) &amp;= - \frac{\mathrm{d}}{\mathrm{d}x} y(x) = y'(x)\\
+\frac{\mathrm{d}^2}{\mathrm{d}t^2} z(t) = \ddot{z}(t)&amp;= + \frac{\mathrm{d}^2}{\mathrm{d}x^2} y(x) = y''(x)\end{split}\]</div>
+<p>and therefore <a class="reference internal" href="ODEreduction.html#equation-eulereqn">()</a> reads as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}a(-t)^2\ddot{z} + b(-t)(-\dot{z}) + cz &amp;= 0 \\
+\Rightarrow at^2\ddot{z} + bt\dot{z} + cz = 0\end{split}\]</div>
+<p>This shows that for <span class="math notranslate nohighlight">\(t&gt;0\)</span> we can still have real solutions to this ODE, there would follow the same form as those found
+for <span class="math notranslate nohighlight">\(&gt;0\)</span> - but this range corresponds to <span class="math notranslate nohighlight">\(x&lt;0\)</span>!</p>
+<p>Looking at how this could change the solutions, say for case (1) with real, distinct roots in <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[z(t) = At^{n_1} + Bt^{n_1} \Rightarrow y(x) = A(-x)^{n_1} + B(-x)^{n_2}, \qquad x &lt; 0\]</div>
+<p>Therefore the argument of these solutions is always <span class="math notranslate nohighlight">\(|x|\)</span> irrespective of whether <span class="math notranslate nohighlight">\(x&lt;0\)</span> or <span class="math notranslate nohighlight">\(x &gt; 0\)</span>, therfore we modify our
+solutions to be of the form:</p>
+<p>1. <span class="math notranslate nohighlight">\(y = A\,x^{n_1} + B\,x^{n_2} \longrightarrow y = A\,|x|^{n_1} + B\,|x|^{n_2}\)</span></p>
+<p>2. <span class="math notranslate nohighlight">\(y = x^n\,\left(A \ln(x) + B\right) \Longrightarrow y = |x|^n\,\left(A \ln|x| + B\right)\)</span></p>
+<p>3. <span class="math notranslate nohighlight">\(y = x^{\lambda}\left(A\cos(\mu\ln(x)) + B \sin(\mu\ln(x))\right) \longrightarrow y = |x|^{\lambda}\left(A\cos(\mu\ln|
+x|) + B \sin(\mu\ln|x|)\right)\)</span></p>
+<p>We notice that <span class="math notranslate nohighlight">\(x=0\)</span> is not covered by these solutions as it corresponds to <span class="math notranslate nohighlight">\(cy=0\)</span>.</p>
+<p>By a similar principle, we could define a variable of the form <span class="math notranslate nohighlight">\(t = x - s\)</span>, with predicably similar behaviour, therefore
+we can also shift the ODe to be of the form:</p>
+<div class="math notranslate nohighlight">
+\[a(x-s)^2y'' + b(x-s)y' + cy = 0\]</div>
+<p>giving solutions of the form:
+1. <span class="math notranslate nohighlight">\(y = A\,x^{n_1} + B\,x^{n_2} \longrightarrow y = A\,|x-s|^{n_1} + B\,|x-s|^{n_2}\)</span></p>
+<p>2. <span class="math notranslate nohighlight">\(y = x^n\,\left(A \ln(x) + B\right) \Longrightarrow y = |x-s|^n\,\left(A \ln|x-s| + B\right)\)</span></p>
+<p>3. <span class="math notranslate nohighlight">\(y = x^{\lambda}\left(A\cos(\mu\ln(x)) + B \sin(\mu\ln(x))\right) \longrightarrow y = |x-s|^{\lambda}\left(A\cos(\mu
+\ln|x-s|) + B \sin(\mu\ln|x-s|)\right)\)</span></p>
+<p>however it is also clear here that this solution cannot contain the point <span class="math notranslate nohighlight">\(x=s\)</span>.</p>
+<div class="seealso admonition">
+<p class="admonition-title">Worked example</p>
+<p>Solve the following ODE:</p>
+<div class="math notranslate nohighlight">
+\[x^2\,y'' + xy' - y = 0\]</div>
+<p>Using the ansatz <span class="math notranslate nohighlight">\(y = x^n\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y(x) &amp;= x^n \\
+y'(x) &amp;= nx^{n-1}\\
+y''(x) &amp;= n(n-1)x^{n-2}\end{split}\]</div>
+<p>which means that the ODE can be written as:</p>
+<div class="math notranslate nohighlight">
+\[x^{n}\Big(n(n-1)+n - 1 \Big) = 0 \Rightarrow n^2 - 1 = 0\]</div>
+<p>which means that <span class="math notranslate nohighlight">\(n = \pm 1\)</span> and therefore the solution will be of the form:</p>
+<div class="math notranslate nohighlight">
+\[y = Ax^1 + Bx^{-1}\]</div>
+</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Further worked examples</p>
+<p>1. Solve the ODE <span class="math notranslate nohighlight">\(x^2y'' - 2y = 0, \qquad x &gt;0\)</span></p>
+<p>Using the ansatz <span class="math notranslate nohighlight">\(y = x^n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[x^n \Big(n(n-1) - 2\Big) = 0 \Rightarrow n^2 - n - 2 = (n-2)(n+1) = 0\]</div>
+<p>which has roots of <span class="math notranslate nohighlight">\(n = -1,\, 2\)</span> and hence</p>
+<div class="math notranslate nohighlight">
+\[y = Ax^2 + Bx^{-1}\]</div>
+<p>2. Solve the ODE <span class="math notranslate nohighlight">\(x^2\,y'' - 3x\,y' + 4y = 0, \qquad x &gt;0\)</span></p>
+<p>Using the ansatz <span class="math notranslate nohighlight">\(y = x^n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x^{n}\Big(n(n-1)-3n+4 \Big) &amp;= 0 \Rightarrow n^2-4n+4 = 0 \\
+(n-2)^2 &amp;= 0\end{split}\]</div>
+<p>which has a repeated root of <span class="math notranslate nohighlight">\(n=2\)</span>, so one of the solutions is <span class="math notranslate nohighlight">\(y = Ax^2\)</span>.  We can then use:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y &amp;= x^2 \,f(x) \\
+y' &amp;= 2x\,f + x^2\,f' \\
+y'' &amp;= 2\,f + 2x\,f' + 2x\,f' + x^2\,f'' = 2\,f + 4x\,f' + x^2\,f''\end{split}\]</div>
+<p>substituting these results in we find:</p>
+<div class="math notranslate nohighlight">
+\[x^2\,y'' - 3x\,y' + 4y = x^4\,f''+ (4x^3-3x^3)\,f' + (2x^2-6x^2+4x^2)\,f = 0 \]</div>
+<p>which means we have to solve:</p>
+<div class="math notranslate nohighlight">
+\[x^4\,f'' + x^3\,f' = 0 \Rightarrow f'' + \frac{1}{x}f' = 0\]</div>
+<p>Using the integrating factor method, with <span class="math notranslate nohighlight">\(\mu = e^{\int \frac{1}{x}\,\mathrm{d}x} = x\)</span> we find:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d}}{\mathrm{d}x}\left(x\,f' \right) = 0 \Rightarrow x\,f' = C \]</div>
+<p>and so the solution is found as:</p>
+<div class="math notranslate nohighlight">
+\[f' = \frac{C}{x} \Rightarrow f(x) = C\ln(x)+D\]</div>
+<p>where <span class="math notranslate nohighlight">\(C,\, D\)</span> are constants to be found, so the final solution is:</p>
+<div class="math notranslate nohighlight">
+\[y = x^2(A + B\ln(x))\]</div>
+<p>3. Find the solution to the following differential equation on any interval not containing <span class="math notranslate nohighlight">\(x = - 6\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[3 ( x + 6 )^2 y'' + 25 ( x + 6 ) y' - 16 y = 0\]</div>
+<p>Using the ansatz <span class="math notranslate nohighlight">\(y = |x+6|^n\)</span> we find:</p>
+<div class="math notranslate nohighlight">
+\[|x+6|^n\left(3n(n-1) + 25n - 16 \right) = 0 \Rightarrow 3n^2 + 22n - 16 = 0\]</div>
+<p>which is solved for <span class="math notranslate nohighlight">\((3n - 2)(n + 8) = 0\)</span> nd so <span class="math notranslate nohighlight">\(n = \frac{2}{3}, \,-8\)</span>, meaning that the general solution is of the form:</p>
+<div class="math notranslate nohighlight">
+\[y = A|x+6|^{2/3} + B|x+6|^{-8}\]</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to PHAS0026 - Mathematical Methods for Theoretical Physics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="independent_functions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Independence of Functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-differential-equation-ode">Ordinary Differential Equation (ODE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-differential-equation-pde">Partial Differential Equation (PDE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-ordinary-differential-equation">Linear Ordinary Differential Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-first-order-ode">Linear First-Order ODE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homogeneous-first-order-ode">Homogeneous First-Order ODE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inhomogeneous-first-order-ode">Inhomogeneous First-Order ODE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-second-order-homogeneous-equations">Linear Second-Order Homogeneous Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roots-of-the-characteristic-equation">Roots of the Characteristic Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#case-1-lambda-1-neq-lambda-2">Case 1: <span class="math notranslate nohighlight">\( \lambda_1 \neq \lambda_2 \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#case-2-lambda-1-2-a-pm-ib">Case 2: <span class="math notranslate nohighlight">\( \lambda_{1,2} = a \pm ib \)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#case-3-lambda-1-lambda-2">Case 3: <span class="math notranslate nohighlight">\( \lambda_1 = \lambda_2 \)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varying-coefficients-euler-equations">Varying Coefficients - Euler Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-ranges-of-x">Other ranges of <span class="math notranslate nohighlight">\(x\)</span></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

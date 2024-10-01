@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Green’s Functions &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'greensfunction';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Laplace Transform" href="Laplacian.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to PHAS0026 - Mathematical Methods for Theoretical Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ODEs.html">Linear Ordinary Differential Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="independent_functions.html">Independence of Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variationofparameters.html">Variation of Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Laplacian.html">Laplace Transform</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Green’s Functions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgreensfunction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/greensfunction.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Green’s Functions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2nd-order-ode">Example: 2nd Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuity-of-g-x-t-at-x-t-nth-order-ode">Continuity of <span class="math notranslate nohighlight">\( G(x, t) \)</span> at <span class="math notranslate nohighlight">\( x = t \)</span>: nth Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuity-of-g-x-t-at-x-t-2nd-order-ode">3.9.1 Continuity of <span class="math notranslate nohighlight">\( G(x, t) \)</span> at <span class="math notranslate nohighlight">\( x = t \)</span>: 2nd Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-differential-equations-using-green-s-functions-example">3.9.2 Solving Differential Equations Using Green’s Functions: Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-solve-the-homogeneous-equation">Step 1: Solve the Homogeneous Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-construct-the-green-s-function">Step 2: Construct the Green’s Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">3.9.3 Boundary Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-green-s-function-for-the-2nd-order-ode">3.9.4 Example: Green’s Function for the 2nd Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-differential-equations-using-greens-function-example">3.9.4 Solving Differential Equations Using Green’s Function: Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Step 1: Solve the Homogeneous Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-construct-the-greens-function">Step 2: Construct the Green’s Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-apply-boundary-conditions">Step 3: Apply Boundary Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-continuity-and-discontinuity-conditions">Step 4: Continuity and Discontinuity Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-find-the-particular-solution">Step 5: Find the Particular Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-general-solution">Step 6: General Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.9.5 Boundary Conditions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="green-s-functions">
+<h1>Green’s Functions<a class="headerlink" href="#green-s-functions" title="Permalink to this heading">#</a></h1>
+<p>We can represent the left-hand side of an ODE:</p>
+<div class="math notranslate nohighlight">
+\[L(x) y(x) = f(x)\]</div>
+<p>in the form:</p>
+<div class="math notranslate nohighlight">
+\[L(x) y(x) = f(x)\]</div>
+<p>where the operator <span class="math notranslate nohighlight">\( L(x) \)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[L(x) = a_n(x) \frac{d^n}{dx^n} + a_{n-1}(x) \frac{d^{n-1}}{dx^{n-1}} + \dots + a_1(x) \frac{d}{dx} + a_0(x)\]</div>
+<p>We assume there exists a function <span class="math notranslate nohighlight">\( G(x, t) \)</span>, called the <strong>Green’s function</strong>, such that the solution to the equation is:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = \int_a^b G(x, t) f(t) dt\]</div>
+<p>The function <span class="math notranslate nohighlight">\( G(x, t) \)</span> must satisfy the ODE for a specific right-hand side:</p>
+<div class="math notranslate nohighlight">
+\[L(x) G(x, t) = \delta(x - t)\]</div>
+<p>The boundary conditions for <span class="math notranslate nohighlight">\( G(x, t) \)</span> depend on the specific boundary conditions for the original ODE.</p>
+<section id="example-2nd-order-ode">
+<h2>Example: 2nd Order ODE<a class="headerlink" href="#example-2nd-order-ode" title="Permalink to this heading">#</a></h2>
+<p>Consider the second-order equation:</p>
+<div class="math notranslate nohighlight">
+\[a_2(x) y''(x) + a_1(x) y'(x) + a_0(x) y(x) = f(x), \quad x \in [a, b]\]</div>
+<p>The Green’s function <span class="math notranslate nohighlight">\( G(x, t) \)</span> for this equation satisfies:</p>
+<div class="math notranslate nohighlight">
+\[a_2(x) G''(x, t) + a_1(x) G'(x, t) + a_0(x) G(x, t) = \delta(x - t)\]</div>
+<p>and <span class="math notranslate nohighlight">\( G(a, t) = G(b, t) = 0 \)</span>.</p>
+<p>We integrate this equation near <span class="math notranslate nohighlight">\( x = t \)</span> and find that the Green’s function must be continuous at <span class="math notranslate nohighlight">\( x = t \)</span>, but its derivative has a finite jump at <span class="math notranslate nohighlight">\( x = t \)</span>, given by:</p>
+<div class="math notranslate nohighlight">
+\[\left[ G'(x, t) \right]_{x=t^-}^{x=t^+} = \frac{1}{a_2(t)}\]</div>
+</section>
+<section id="continuity-of-g-x-t-at-x-t-nth-order-ode">
+<h2>Continuity of <span class="math notranslate nohighlight">\( G(x, t) \)</span> at <span class="math notranslate nohighlight">\( x = t \)</span>: nth Order ODE<a class="headerlink" href="#continuity-of-g-x-t-at-x-t-nth-order-ode" title="Permalink to this heading">#</a></h2>
+<p>Consider an nth-order ODE:</p>
+<div class="math notranslate nohighlight">
+\[a_n(x) \frac{d^n y(x)}{dx^n} + a_{n-1}(x) \frac{d^{n-1} y(x)}{dx^{n-1}} + \dots + a_1(x) \frac{dy(x)}{dx} + a_0(x) y(x) = f(x)\]</div>
+<p>For <span class="math notranslate nohighlight">\( x \in [a, b] \)</span>, the Green’s function <span class="math notranslate nohighlight">\( G(x, t) \)</span> satisfies the equation:</p>
+<div class="math notranslate nohighlight">
+\[a_n(x) \frac{d^n G(x, t)}{dx^n} + a_{n-1}(x) \frac{d^{n-1} G(x, t)}{dx^{n-1}} + \dots + a_0(x) G(x, t) = \delta(x - t)\]</div>
+<p>The Green’s function must satisfy the boundary conditions of the original ODE. To find <span class="math notranslate nohighlight">\( G(x, t) \)</span>, we consider the behavior near <span class="math notranslate nohighlight">\( x = t \)</span>. We integrate both sides of the equation over the interval <span class="math notranslate nohighlight">\( [t - \epsilon, t + \epsilon] \)</span> where <span class="math notranslate nohighlight">\( \epsilon \)</span> is a small number:</p>
+<div class="math notranslate nohighlight">
+\[\int_{t - \epsilon}^{t + \epsilon} \left( a_n(x) \frac{d^n G(x, t)}{dx^n} + a_{n-1}(x) \frac{d^{n-1} G(x, t)}{dx^{n-1}} + \dots + a_0(x) G(x, t) \right) dx = \int_{t - \epsilon}^{t + \epsilon} \delta(x - t) dx = 1\]</div>
+<p>The contributions from terms involving lower-order derivatives of <span class="math notranslate nohighlight">\( G(x, t) \)</span> vanish as <span class="math notranslate nohighlight">\( \epsilon \to 0 \)</span>, and we are left with:</p>
+<div class="math notranslate nohighlight">
+\[\left[ a_n(x) \frac{d^{n-1} G(x, t)}{dx^{n-1}} \right]_{x = t^-}^{x = t^+} = 1\]</div>
+<p>Thus, the Green’s function <span class="math notranslate nohighlight">\( G(x, t) \)</span> has a discontinuity in its <span class="math notranslate nohighlight">\( (n-1) \)</span>th derivative at <span class="math notranslate nohighlight">\( x = t \)</span>, but all lower derivatives of <span class="math notranslate nohighlight">\( G(x, t) \)</span> are continuous at <span class="math notranslate nohighlight">\( x = t \)</span>.</p>
+</section>
+<section id="continuity-of-g-x-t-at-x-t-2nd-order-ode">
+<h2>3.9.1 Continuity of <span class="math notranslate nohighlight">\( G(x, t) \)</span> at <span class="math notranslate nohighlight">\( x = t \)</span>: 2nd Order ODE<a class="headerlink" href="#continuity-of-g-x-t-at-x-t-2nd-order-ode" title="Permalink to this heading">#</a></h2>
+<p>Let us apply the above concepts to the second-order ODE:</p>
+<div class="math notranslate nohighlight">
+\[a_2(x) \frac{d^2 y(x)}{dx^2} + a_1(x) \frac{dy(x)}{dx} + a_0(x) y(x) = f(x)\]</div>
+<p>The Green’s function <span class="math notranslate nohighlight">\( G(x, t) \)</span> satisfies:</p>
+<div class="math notranslate nohighlight">
+\[a_2(x) \frac{d^2 G(x, t)}{dx^2} + a_1(x) \frac{dG(x, t)}{dx} + a_0(x) G(x, t) = \delta(x - t)\]</div>
+<p>We integrate this equation over <span class="math notranslate nohighlight">\( [t - \epsilon, t + \epsilon] \)</span> to obtain:</p>
+<div class="math notranslate nohighlight">
+\[\int_{t - \epsilon}^{t + \epsilon} \left( a_2(x) \frac{d^2 G(x, t)}{dx^2} + a_1(x) \frac{dG(x, t)}{dx} + a_0(x) G(x, t) \right) dx = \int_{t - \epsilon}^{t + \epsilon} \delta(x - t) dx = 1\]</div>
+<p>Carrying out the integration:</p>
+<ol class="arabic">
+<li><p><strong>First term</strong>: The integral of <span class="math notranslate nohighlight">\( a_2(x) \frac{d^2 G(x, t)}{dx^2} \)</span> results in:</p>
+<div class="math notranslate nohighlight">
+\[\left[ a_2(x) \frac{dG(x, t)}{dx} \right]_{x = t^-}^{x = t^+}\]</div>
+</li>
+<li><p><strong>Second term</strong>: The integral of <span class="math notranslate nohighlight">\( a_1(x) \frac{dG(x, t)}{dx} \)</span> vanishes as <span class="math notranslate nohighlight">\( \epsilon \to 0 \)</span>.</p></li>
+</ol>
+<p>Thus, the discontinuity in the derivative of <span class="math notranslate nohighlight">\( G(x, t) \)</span> at <span class="math notranslate nohighlight">\( x = t \)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\left[ a_2(x) \frac{dG(x, t)}{dx} \right]_{x = t^-}^{x = t^+} = 1\]</div>
+<p>Additionally, <span class="math notranslate nohighlight">\( G(x, t) \)</span> must be continuous at <span class="math notranslate nohighlight">\( x = t \)</span>, meaning:</p>
+<div class="math notranslate nohighlight">
+\[\left[ G(x, t) \right]_{x = t^-}^{x = t^+} = 0\]</div>
+</section>
+<section id="solving-differential-equations-using-green-s-functions-example">
+<h2>3.9.2 Solving Differential Equations Using Green’s Functions: Example<a class="headerlink" href="#solving-differential-equations-using-green-s-functions-example" title="Permalink to this heading">#</a></h2>
+<p>Find the general solution of the inhomogeneous equation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 y(x)}{dx^2} + y(x) = x\]</div>
+<p>with boundary conditions <span class="math notranslate nohighlight">\( y(0) = y(\pi/2) = 0 \)</span>.</p>
+<section id="step-1-solve-the-homogeneous-equation">
+<h3>Step 1: Solve the Homogeneous Equation<a class="headerlink" href="#step-1-solve-the-homogeneous-equation" title="Permalink to this heading">#</a></h3>
+<p>The homogeneous equation is:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 y(x)}{dx^2} + y(x) = 0\]</div>
+<p>The general solution of the homogeneous equation is:</p>
+<div class="math notranslate nohighlight">
+\[y_h(x) = A \sin(x) + B \cos(x)\]</div>
+<p>Using the boundary conditions <span class="math notranslate nohighlight">\( y(0) = 0 \)</span> and <span class="math notranslate nohighlight">\( y(\pi/2) = 0 \)</span>, we find that <span class="math notranslate nohighlight">\( B = 0 \)</span> and <span class="math notranslate nohighlight">\( A = 0 \)</span>. Thus, the solution to the homogeneous equation is <span class="math notranslate nohighlight">\( y_h(x) = 0 \)</span>.</p>
+</section>
+<section id="step-2-construct-the-green-s-function">
+<h3>Step 2: Construct the Green’s Function<a class="headerlink" href="#step-2-construct-the-green-s-function" title="Permalink to this heading">#</a></h3>
+<p>The Green’s function satisfies:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 G(x, t)}{dx^2} + G(x, t) = \delta(x - t)\]</div>
+<p>For <span class="math notranslate nohighlight">\( x &lt; t \)</span>, the solution to the homogeneous equation is:</p>
+<div class="math notranslate nohighlight">
+\[G(x, t) = A(t) \sin(x)\]</div>
+<p>For <span class="math notranslate nohighlight">\( x &gt; t \)</span>, the solution is:</p>
+<div class="math notranslate nohighlight">
+\[G(x, t) = B(t) \sin(x)\]</div>
+<p>The boundary conditions <span class="math notranslate nohighlight">\( G(0, t) = G(\pi/2, t) = 0 \)</span> imply that <span class="math notranslate nohighlight">\( A(t) = 0 \)</span> and <span class="math notranslate nohighlight">\( B(t) = 0 \)</span>.</p>
+<p>Thus, the Green’s function is:</p>
+<div class="math notranslate nohighlight">
+\[G(x, t) = 0\]</div>
+</section>
+</section>
+<section id="boundary-conditions">
+<h2>3.9.3 Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this heading">#</a></h2>
+<p>An nth-order ODE requires n boundary conditions, which can be given in various forms, such as:</p>
+<ul class="simple">
+<li><p><strong>N-point conditions</strong>: <span class="math notranslate nohighlight">\( y(x_1) = y_1, y(x_2) = y_2, \dots, y(x_n) = y_n \)</span></p></li>
+<li><p><strong>One-point boundary conditions</strong>: <span class="math notranslate nohighlight">\( y(x_0) = a, y'(x_0) = b, \dots, y^{(n)}(x_0) = c \)</span></p></li>
+</ul>
+<p>We have so far applied homogeneous boundary conditions. For inhomogeneous boundary conditions, use the substitution:</p>
+<div class="math notranslate nohighlight">
+\[u(x) = y(x) - h(x)\]</div>
+<p>where <span class="math notranslate nohighlight">\( h(x) \)</span> is a polynomial of order <span class="math notranslate nohighlight">\( n-1 \)</span> that satisfies the inhomogeneous boundary conditions. Then, the function <span class="math notranslate nohighlight">\( u(x) \)</span> will satisfy homogeneous boundary conditions.</p>
+</section>
+<section id="example-green-s-function-for-the-2nd-order-ode">
+<h2>3.9.4 Example: Green’s Function for the 2nd Order ODE<a class="headerlink" href="#example-green-s-function-for-the-2nd-order-ode" title="Permalink to this heading">#</a></h2>
+<p>Let us solve the equation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 y}{dx^2} + y = f(x)\]</div>
+<p>with boundary conditions <span class="math notranslate nohighlight">\( y(0) = 0 \)</span> and <span class="math notranslate nohighlight">\( y(\pi/2) = 0 \)</span>. The corresponding Green’s function satisfies:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 G(x, t)}{dx^2} + G(x, t) = \delta(x - t)\]</div>
+<p>For <span class="math notranslate nohighlight">\( x &lt; t \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[G(x, t) = A(t) \sin(x)\]</div>
+<p>For <span class="math notranslate nohighlight">\( x &gt; t \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[G(x, t) = B(t) \sin(x)\]</div>
+<p>Applying the boundary conditions <span class="math notranslate nohighlight">\( G(0, t) = G(\pi/2, t) = 0 \)</span> results in:</p>
+<div class="math notranslate nohighlight">
+\[A(t) = 0, \quad B(t) = 0\]</div>
+<p>Thus, the Green’s function is zero.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>Green’s functions are a powerful tool for solving linear inhomogeneous differential equations, especially when combined with the appropriate boundary conditions. The construction of the Green’s function allows us to express the solution to the differential equation as an integral over the source term, weighted by the Green’s function.</p>
+</section>
+<section id="solving-differential-equations-using-greens-function-example">
+<h2>3.9.4 Solving Differential Equations Using Green’s Function: Example<a class="headerlink" href="#solving-differential-equations-using-greens-function-example" title="Permalink to this heading">#</a></h2>
+<p>Let’s now find the general solution of the inhomogeneous equation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 y}{dx^2} + y = x\]</div>
+<p>where <span class="math notranslate nohighlight">\( y(x) \)</span> satisfies the boundary conditions <span class="math notranslate nohighlight">\( y(0) = y(\pi/2) = 0 \)</span>.</p>
+<section id="id1">
+<h3>Step 1: Solve the Homogeneous Equation<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>The homogeneous equation is:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 y}{dx^2} + y = 0\]</div>
+<p>The general solution to this equation is:</p>
+<div class="math notranslate nohighlight">
+\[y_h(x) = c_1 \sin(x) + c_2 \cos(x)\]</div>
+<p>Since we are given the boundary conditions <span class="math notranslate nohighlight">\( y(0) = 0 \)</span> and <span class="math notranslate nohighlight">\( y(\pi/2) = 0 \)</span>, we apply them to the general solution:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\( y(0) = 0 \)</span> gives <span class="math notranslate nohighlight">\( c_2 = 0 \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( y(\pi/2) = 0 \)</span> gives <span class="math notranslate nohighlight">\( c_1 \sin(\pi/2) = c_1 = 0 \)</span>.</p></li>
+</ol>
+<p>Thus, the homogeneous solution is <span class="math notranslate nohighlight">\( y_h(x) = 0 \)</span>.</p>
+</section>
+<section id="step-2-construct-the-greens-function">
+<h3>Step 2: Construct the Green’s Function<a class="headerlink" href="#step-2-construct-the-greens-function" title="Permalink to this heading">#</a></h3>
+<p>The Green’s function satisfies the following differential equation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 G(x, t)}{dx^2} + G(x, t) = \delta(x - t)\]</div>
+<p>For <span class="math notranslate nohighlight">\( x \neq t \)</span>, we solve the homogeneous equation:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2 G(x, t)}{dx^2} + G(x, t) = 0\]</div>
+<p>For <span class="math notranslate nohighlight">\( x &lt; t \)</span>, the solution is:</p>
+<div class="math notranslate nohighlight">
+\[G(x, t) = A(t) \sin(x)\]</div>
+<p>For <span class="math notranslate nohighlight">\( x &gt; t \)</span>, the solution is:</p>
+<div class="math notranslate nohighlight">
+\[G(x, t) = B(t) \sin(x)\]</div>
+</section>
+<section id="step-3-apply-boundary-conditions">
+<h3>Step 3: Apply Boundary Conditions<a class="headerlink" href="#step-3-apply-boundary-conditions" title="Permalink to this heading">#</a></h3>
+<p>The boundary conditions <span class="math notranslate nohighlight">\( G(0, t) = G(\pi/2, t) = 0 \)</span> imply:</p>
+<ol class="arabic simple">
+<li><p>At <span class="math notranslate nohighlight">\( x = 0 \)</span>: <span class="math notranslate nohighlight">\( G(0, t) = A(t) \sin(0) = 0 \)</span>, so <span class="math notranslate nohighlight">\( A(t) = 0 \)</span>.</p></li>
+<li><p>At <span class="math notranslate nohighlight">\( x = \pi/2 \)</span>: <span class="math notranslate nohighlight">\( G(\pi/2, t) = B(t) \sin(\pi/2) = B(t) \)</span>, so <span class="math notranslate nohighlight">\( B(t) = 0 \)</span>.</p></li>
+</ol>
+<p>Thus, the Green’s function must satisfy the boundary conditions and continuity:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}G(x, t) = 
+\begin{cases} 
+A(t) \sin(x) \quad \text{for } x &lt; t \\
+B(t) \sin(x) \quad \text{for } x &gt; t
+\end{cases}\end{split}\]</div>
+</section>
+<section id="step-4-continuity-and-discontinuity-conditions">
+<h3>Step 4: Continuity and Discontinuity Conditions<a class="headerlink" href="#step-4-continuity-and-discontinuity-conditions" title="Permalink to this heading">#</a></h3>
+<p>The Green’s function must be continuous at <span class="math notranslate nohighlight">\( x = t \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[A(t) \sin(t) = B(t) \sin(t)\]</div>
+<p>The derivative of the Green’s function has a discontinuity at <span class="math notranslate nohighlight">\( x = t \)</span>, with:</p>
+<div class="math notranslate nohighlight">
+\[\left[ \frac{dG(x, t)}{dx} \right]_{x=t^+}^{x=t^-} = -1\]</div>
+<p>From this, we calculate the values of <span class="math notranslate nohighlight">\( A(t) \)</span> and <span class="math notranslate nohighlight">\( B(t) \)</span>. Thus, the Green’s function is determined.</p>
+</section>
+<section id="step-5-find-the-particular-solution">
+<h3>Step 5: Find the Particular Solution<a class="headerlink" href="#step-5-find-the-particular-solution" title="Permalink to this heading">#</a></h3>
+<p>The particular solution of the inhomogeneous equation is given by:</p>
+<div class="math notranslate nohighlight">
+\[y_p(x) = \int_0^{\pi/2} G(x, t) f(t) dt\]</div>
+<p>Substituting the Green’s function and the given inhomogeneous term <span class="math notranslate nohighlight">\( f(t) = t \)</span>, we can integrate to find <span class="math notranslate nohighlight">\( y_p(x) \)</span>.</p>
+</section>
+<section id="step-6-general-solution">
+<h3>Step 6: General Solution<a class="headerlink" href="#step-6-general-solution" title="Permalink to this heading">#</a></h3>
+<p>The general solution to the inhomogeneous equation is:</p>
+<div class="math notranslate nohighlight">
+\[y(x) = y_h(x) + y_p(x)\]</div>
+<p>Since <span class="math notranslate nohighlight">\( y_h(x) = 0 \)</span>, the solution is simply the particular solution <span class="math notranslate nohighlight">\( y_p(x) \)</span>.</p>
+</section>
+</section>
+<section id="id2">
+<h2>3.9.5 Boundary Conditions<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>An nth-order ODE requires n boundary conditions, which can be given in various forms. For example:</p>
+<ul class="simple">
+<li><p><strong>n-point boundary conditions</strong>: <span class="math notranslate nohighlight">\( y(x_1) = y_1, y(x_2) = y_2, \dots, y(x_n) = y_n \)</span></p></li>
+<li><p><strong>One-point boundary conditions</strong>: <span class="math notranslate nohighlight">\( y(x_0) = a, y'(x_0) = b, \dots, y^{(n-1)}(x_0) = c \)</span></p></li>
+</ul>
+<p>So far, we have only applied homogeneous boundary conditions. For inhomogeneous boundary conditions, we use the substitution:</p>
+<div class="math notranslate nohighlight">
+\[u(x) = y(x) - h(x)\]</div>
+<p>where <span class="math notranslate nohighlight">\( h(x) \)</span> is a polynomial of order <span class="math notranslate nohighlight">\( n-1 \)</span> that satisfies the inhomogeneous boundary conditions. Then the function <span class="math notranslate nohighlight">\( u(x) \)</span> will satisfy homogeneous boundary conditions.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Laplacian.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Laplace Transform</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2nd-order-ode">Example: 2nd Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuity-of-g-x-t-at-x-t-nth-order-ode">Continuity of <span class="math notranslate nohighlight">\( G(x, t) \)</span> at <span class="math notranslate nohighlight">\( x = t \)</span>: nth Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuity-of-g-x-t-at-x-t-2nd-order-ode">3.9.1 Continuity of <span class="math notranslate nohighlight">\( G(x, t) \)</span> at <span class="math notranslate nohighlight">\( x = t \)</span>: 2nd Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-differential-equations-using-green-s-functions-example">3.9.2 Solving Differential Equations Using Green’s Functions: Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-solve-the-homogeneous-equation">Step 1: Solve the Homogeneous Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-construct-the-green-s-function">Step 2: Construct the Green’s Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">3.9.3 Boundary Conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-green-s-function-for-the-2nd-order-ode">3.9.4 Example: Green’s Function for the 2nd Order ODE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-differential-equations-using-greens-function-example">3.9.4 Solving Differential Equations Using Green’s Function: Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Step 1: Solve the Homogeneous Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-construct-the-greens-function">Step 2: Construct the Green’s Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-apply-boundary-conditions">Step 3: Apply Boundary Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-continuity-and-discontinuity-conditions">Step 4: Continuity and Discontinuity Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-find-the-particular-solution">Step 5: Find the Particular Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6-general-solution">Step 6: General Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.9.5 Boundary Conditions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
